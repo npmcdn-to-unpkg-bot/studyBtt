@@ -79,3 +79,52 @@ body {
 .icon {
     width: 100%;
 }
+
+
+.day > div {
+    font-weight: bold;
+    line-height: 48px;
+}
+
+.weekday span {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.weekday p {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.weather img {
+    width: 48px;
+}
+
+.high p,
+.low p,
+.hourly .temp {
+    font-size: 16px;
+}
+
+.hourly {
+    text-align: center;
+    display: none;
+}
+
+.hourly .hour {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.hourly img {
+    width: 24px;
+}
+
+.hourly p {
+    margin: 16px 0;
+}
+
+.last {
+    margin-bottom: 100px;
+}
