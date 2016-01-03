@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="js/angular.min.js"></script>
+    <link href="css/mystyle.css" type="text/css" rel="stylesheet">
+</head>
+<body ng-app="myapp">
+<div ng-controller="06Controller">
+    <form name="testForm">
+        <input ng-model="val" ng-pattern="/^\d+$/" name="anim" class="my-input" />
+        <h2>{{message.title}}</h2>
+        <h3>{{message.num1}}</h3>
+        <input ng-model="num1" ng-pattern="/^[0-9]+$/" class="my-input" ng-keyup="showResult()"/>
+        <h3>{{message.num2}}</h3>
+        <input ng-model="num2" ng-pattern="/^[0-9]+$/" class="my-input" ng-keyup="showResult()"/>
+        <div>{{message.phep_cong}} {{result.phep_cong}}</div>
+        <div>{{message.phep_tru}} {{result.phep_tru}}</div>
+        <div>{{message.phep_nhan}} {{result.phep_nhan}}</div>
+        <div>{{message.phep_chia}} {{result.phep_chia}}</div>
+    </form>
+</div>
+<!--module-->
+<script src="js/app.js"></script>
+<!--controller-->
+<script src="js/controllers/06Controller.js"></script>
+<!--directive-->
+</body>
+</html>

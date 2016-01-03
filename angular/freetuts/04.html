@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="js/angular.min.js"></script>
+</head>
+<body ng-app="myapp">
+<div ng-controller="04Controller">
+    Nhập tên của bạn:
+    <input type="text" value="" ng-model="username">
+    <button ng-click='sayHello()'>In thông báo</button>
+    <hr>
+    {{greeting}}
+    <div ng-bind="username"></div>
+    <!--test create directive-->
+    <form-directive></form-directive>
+</div>
+<!--module-->
+<script src="js/app.js"></script>
+<!--controller-->
+<script src="js/controllers/04Controller.js"></script>
+<!--directive-->
+<script src="js/directives/05FormDirective.js"></script>
+</body>
+</html>
