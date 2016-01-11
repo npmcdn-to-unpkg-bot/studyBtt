@@ -7,3 +7,12 @@
     color:white;
     background: red;
 }
+
+.blue {
+    background: blue;
+    color: white;
+}
+
+.big {
+    font-size: 20px;
+}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="js/angular.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="css/mystyle.css" type="text/css" rel="stylesheet">
+</head>
+<body ng-app="myapp">
+<div ng-controller="newService" class="container">
+    <div>Nhập vào số chẵn thì sẽ thông báo lên màn hình : </div>
+    <input ng-model="number" ng-change="thongbao()">
+</div>
+<!--module-->
+<script src="js/app.js"></script>
+<!--controller-->
+<script src="js/controllers/newService.js"></script>
+<script src="js/services/kt_so_chan.js"></script>
+<!--directive-->
+</body>
+</html>
