@@ -14,12 +14,14 @@
     <p ng-class="tenClass">My name is btt</p>
     <!--Ví dụ 2-->
     <h2>Ví dụ 2</h2>
-    <p ng-class="[blue, big]">This is a example AngularJs</p>
-    <input class="form-control" type="text" ng-model="blue" placeholder="Enter blue"><br>
-    <input class="form-control" type="text" ng-model="big" placeholder="Enter big"><br>
+    <p ng-class="[blue_model, big_model]">This is a example AngularJs</p>
+    <input class="form-control" type="text" ng-model="blue_model" placeholder="Enter blue"><br>
+    <input class="form-control" type="text" ng-model="big_model" placeholder="Enter big"><br>
     <!--Ví dụ 3-->
     <h2>Ví dụ 3</h2>
-
+    <p ng-class="{blue: scope_blue, big: scope_big}" class="animate">ngClass by Object</p>
+    <div class="checkbox"><label><input type="checkbox" ng-model="scope_blue">Blue</label></div>
+    <div class="checkbox"><label><input type="checkbox" ng-model="scope_big"> Big </label></div>
 </div>
 <!--module-->
 <script src="js/app.js"></script>
