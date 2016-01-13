@@ -9,14 +9,19 @@
     <link href="css/mystyle.css" type="text/css" rel="stylesheet">
 </head>
 <body ng-app="myapp">
-<div ng-controller="08Controller" class="container">
-    <input name="name_ng_model" ng-model="model1"/>
-    <label ng-bind-html="model1"></label>
+<div ng-controller="09Controller" class="container">
+    <form class="form09" name="myForm">
+        User name : <input name="input" ng-model="username" type="text" size="10px" placeholder="required" required>
+        <div>user name = {{username}}</div>
+        <div>myForm.input.$valid = {{myForm.input.$valid}}</div><br>
+        <div>myForm.input.$error = {{myForm.input.$error}}</div><br>
+        <div>myForm.$valid = {{myForm.$valid}}</div>
+    </form>
 </div>
 <!--module-->
 <script src="js/app.js"></script>
 <!--controller-->
-<script src="js/controllers/08Controller.js"></script>
+<script src="js/controllers/09Controller.js"></script>
 <!--directive-->
 </body>
 </html>

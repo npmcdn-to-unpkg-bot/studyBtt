@@ -8,6 +8,14 @@
     background: red;
 }
 
+.form09 {
+    transition:0.5s linear all;
+    background: white;
+}
+.form09.ng-invalid {
+    background: red;
+    color:white;
+}
 .blue {
     background: blue;
     color: white;
