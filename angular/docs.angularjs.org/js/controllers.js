@@ -10,9 +10,17 @@ phoneCatController.controller('PhoneListCtrl', ['$scope', '$http', function ($sc
     $scope.orderProp = 'age';
 }]);
 
-phoneCatController.controller('PhoneDetailCtrl', ['$scope', '$routeParams', '$http',
-    function ($scope, $routeParams, $http) {
-        $http.get('phones/' + $routeParams.idPhone + '.json').success (function (data) {
-            $scope.phone = data;
-        });
+phoneCatController.controller('PhoneDetailCtrl', ['$scope', '$routeParams', '$http', function ($scope, $routeParams, $http) {
+    $http.get('phones/' + $routeParams.idPhone + '.json').success (function (data) {
+        $scope.phone = data;
+        $scope.mailImg = data.images[0];
+    });
+
+    $scope.changeImg = function (imgClick) {
+        $scope.mailImg = imgClick;
+    };
+
+    $scope.hello = function(name) {
+        alert('Hello ' + (name || 'world') + '!');
+    };
 }]);

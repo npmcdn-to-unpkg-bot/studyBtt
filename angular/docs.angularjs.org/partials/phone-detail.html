@@ -1,30 +1,28 @@
 <div class="container">
   <div class="col-md-12 border-bottom">
     <div class="col-md-4 border-right">
-      <img ng-src="{{phone.images[0]}}" class="img-responsive">
+      <img ng-src="{{mailImg}}" class="img-responsive">
     </div>
     <div class="col-md-8 row">
       <h1 class="col-md-12 border-bottom">{{phone.name}}</h1>
       <p class="col-md-12">{{phone.description}}</p>
       <div class="">
         <div class="col-md-2" ng-repeat="img in phone.images">
-          <img class="img-responsive" ng-src="{{img}}">
+          <img class="img-responsive" ng-src="{{img}}" ng-click="changeImg(img)">
         </div>
       </div>
     </div>
   </div>
   <div class="col-md-12">
-    <li>
-      <span>Availability and Networks</span>
-      <dl>
-        <dt>Availability</dt>
-        <dd ng-repeat="availability in phone.availability">{{availability}}</dd>
-      </dl>
-    </li>
-    ...
-    <li>
-      <span>Additional Features</span>
+      <div class="col-md-3">
+          <dt>Infrared</dt>
+          <dd>{{phone.connectivity.infrared | checkmark}}</dd>
+          <dt>GPS</dt>
+          <dd>{{phone.connectivity.gps | checkmark}}</dd>
+      </div>
+    <div class="col-md-3">
+      <strong>Additional Features</strong>
       <dd>{{phone.additionalFeatures}}</dd>
-    </li>
+    </div>
   </div>
 </div>
