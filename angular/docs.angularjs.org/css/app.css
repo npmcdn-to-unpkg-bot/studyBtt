@@ -1,6 +1,29 @@
 /* app css stylesheet */
 
 body {
-  padding-top: 20px;
+    padding-top: 20px;
 }
 
+.thumb {
+    float: left;
+    margin: 0px 15px 15px 0;
+    padding-bottom: 1em;
+    height: 100px;
+    width: 100px;
+}
+
+ul.phones li {
+    clear: both;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #ddd;
+}
+
+.border-right {
+    border-right: 1px solid #ddd;
+}
+
+.border-left {
+    border-left: 1px solid #ddd;
+}

@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <!--Sidebar content-->
+      <div class="form-group">
+        <label for="searchByName">Search by Name :</label>
+        <input id="searchByName" type="text" class="form-control" ng-model="query">
+      </div>
+      <label for="sort">Sort : </label>
+      <select ng-model="orderProp">
+        <option value="name">Alphabetical - ABC</option>
+        <option value="-name">Alphabetical - ZYX</option>
+        <option value="age">Newest</option>
+        <option value="-age">Oldest</option>
+      </select>
+
+    </div>
+    <div class="col-md-10">
+      <!--Body content-->
+      <div class="phones">
+        <div class="thumbnail col-md-12 clearfix" ng-repeat="phone in phones | filter : {name : query} | orderBy:orderProp">
+          <a href="#/phones/{{phone.id}}" class="thumb">
+            <!--sự khác nhau giữa ng-src và src :-->
+            <!--src thì ở phần console, brower sẽ truy cập đến 1 request :/app/%7B%7Bphone.imageUrl%7D%7D-->
+            <!--=> dùng ng-src-->
+            <img class="img-responsive" ng-src="{{phone.imageUrl}}" alt=""></a>
+          <a href="#/phones/{{phone.id}}">{{phone.name}}</a>
+          <p>{{phone.snippet}}</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

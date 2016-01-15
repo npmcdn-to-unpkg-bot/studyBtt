@@ -1,21 +1,18 @@
 'use strict';
 
 /* Controllers */
+var phoneCatController = angular.module('phoneCatControllers', []);
+phoneCatController.controller('PhoneListCtrl', ['$scope', '$http', function ($scope, $http) {
+    $http.get('phones/phones.json').success (function (data){
+        $scope.phones = data.splice(0, 6);
+    });
 
-var phonecatApp = angular.module('phonecatApp', []);
+    $scope.orderProp = 'age';
+}]);
 
-phonecatApp.controller('PhoneListCtrl', function($scope) {
-  $scope.phones = [
-    {'name': 'A Nexus S',
-     'snippet': 'Fast just got faster with Nexus S.',
-     'age': 4},
-    {'name': 'Motorola XOOM™ with Wi-Fi',
-     'snippet': 'The Next, Next Generation tablet.',
-     'age': 2},
-    {'name': 'C MOTOROLA XOOM™',
-     'snippet': 'The Next, Next Generation tablet.',
-     'age': 3}
-  ];
-
-  $scope.orderProp = 'age';
-});
+phoneCatController.controller('PhoneDetailCtrl', ['$scope', '$routeParams', '$http',
+    function ($scope, $routeParams, $http) {
+        $http.get('phones/' + $routeParams.idPhone + '.json').success (function (data) {
+            $scope.phone = data;
+        });
+}]);
