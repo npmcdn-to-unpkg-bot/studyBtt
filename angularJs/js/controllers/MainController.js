@@ -1,4 +1,4 @@
-app.controller('MainController', ['$scope', function ($scope) {
+app.controller('MainController', ['$scope', '$http', function ($scope, $http) {
     $scope.move = {
         icon: 'img/move.jpg',
         title: 'MOVE',
@@ -13,20 +13,6 @@ app.controller('MainController', ['$scope', function ($scope) {
         price: 2.99
     };
 
-    $scope.gameboard = {
-        icon: 'img/gameboard.jpg',
-        title: 'Gameboard',
-        developer: 'Armando P.',
-        price: 1.99
-    };
-
-    $scope.forecast = {
-        icon: 'img/forecast.jpg',
-        title: 'Forecast',
-        developer: 'Forecast',
-        price: 1.99
-    };
-
     $scope.apps = [
         {
             icon: 'img/gameboard.jpg',
@@ -39,6 +25,16 @@ app.controller('MainController', ['$scope', function ($scope) {
             title: 'Forecast',
             developer: 'Forecast',
             price: 1.99
+        },
+        {
+            icon: 'img/move.jpg',
+            title: 'MOVE',
+            developer: 'MOVE, Inc.',
+            price: 0.99
         }
     ];
+
+    $http.get('/angularJs/data/listcard.json').success(function (data) {
+        $scope.cards = data;
+    });
 }]);
