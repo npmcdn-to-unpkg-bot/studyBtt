@@ -18,7 +18,8 @@
     <div class="col-md-10">
       <!--Body content-->
       <div class="phones">
-        <div class="thumbnail col-md-12 clearfix" ng-repeat="phone in phones | filter : {name : query} | orderBy:orderProp">
+        <div class="thumbnail col-md-12 clearfix phone-listing"
+             ng-repeat="phone in phones | filter : {name : query} | orderBy:orderProp">
           <a href="#/phones/{{phone.id}}" class="thumb">
             <!--sự khác nhau giữa ng-src và src :-->
             <!--src thì ở phần console, brower sẽ truy cập đến 1 request :/app/%7B%7Bphone.imageUrl%7D%7D-->

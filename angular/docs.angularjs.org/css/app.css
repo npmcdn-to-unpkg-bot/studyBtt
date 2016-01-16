@@ -16,6 +16,12 @@ ul.phones li {
     clear: both;
 }
 
+.phones .thumbnail {
+    clear: both;
+    height: 120px;
+    padding-top: 15px;
+}
+
 .border-bottom {
     border-bottom: 1px solid #ddd;
 }
