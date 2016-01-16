@@ -1,0 +1,7 @@
+<a href="#/phones/{{phone.id}}" class="thumb">
+    <!--sự khác nhau giữa ng-src và src :-->
+    <!--src thì ở phần console, brower sẽ truy cập đến 1 request :/app/%7B%7Bphone.imageUrl%7D%7D-->
+    <!--=> dùng ng-src-->
+    <img class="img-responsive" ng-src="{{phone.imageUrl}}" alt=""></a>
+<a href="#/phones/{{phone.id}}">{{phone.name}}</a>
+<p>{{phone.snippet}}</p>
