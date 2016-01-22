@@ -1,0 +1,65 @@
+<h2>Contact FireBase</h2>
+<div class="col-md-12" ng-show="contactShow">
+    <h3>Detail Contact</h3>
+    <dl class="dl-horizontal">
+        <dt>Email : </dt>
+        <dd>...</dd>
+    </dl>
+</div>
+
+<div class="col-md-12" ng-show="addFormShow">
+    <h3>Add Contact</h3>
+    <form name="addContactForm" id="addContact" ng-submit="addContact()">
+        <div class="form-group" ng-class="{'has-error' : addContactForm.email.$invalid && !addContactForm.email.$pristine}">
+            <label for="email">Email address</label>
+            <input type="email" name="email" ng-minlength="5" required
+                   ng-model="email" class="form-control" id="email" placeholder="Email">
+            <p ng-show="addContactForm.email.$error.required && !addContactForm.email.$pristine" class="error-txt">Your Email is required.</p>
+            <p ng-show="addContactForm.email.$error.minlength" class="error-txt">Email is too short.</p>
+        </div>
+        <div class="form-group" ng-class="{'has-error' : addContactForm.fullname.$invalid && !addContactForm.fullname.$pristine}">
+            <label for="fullname">Full Name</label>
+            <input type="text" name="fullname" ng-minlength="5" required
+                   ng-model="fullname" class="form-control" id="fullname" placeholder="Full Name">
+            <p ng-show="addContactForm.fullname.$error.required && !addContactForm.fullname.$pristine" class="error-txt">Your Email is required.</p>
+            <p ng-show="addContactForm.fullname.$error.minlength" class="error-txt">Full Name is too short.</p>
+        </div>
+        <div class="form-group" ng-class="{'has-error' : addContactForm.nickname.$invalid && !addContactForm.nickname.$pristine}">
+            <label for="nickname">Nick name</label>
+            <input type="text" name="nickname" ng-minlength="5" required
+                   ng-model="nickname" class="form-control" id="nickname" placeholder="Nick name">
+            <p ng-show="addContactForm.nickname.$error.required && !addContactForm.nickname.$pristine" class="error-txt">Your Email is required.</p>
+            <p ng-show="addContactForm.nickname.$error.minlength" class="error-txt">Nickname is too short.</p>
+        </div>
+        <button ng-disabled="addContactForm.$invalid" type="submit" class="btn btn-info">Add Contact</button>
+    </form>
+</div>
+
+<div class="col-md-12 list-contact">
+    <div class="row">
+        <h3 class="col-md-3">List Contact ({{messages.length}})</h3>
+        <button class="btn btn-sm btn-primary pull-right col-md-1" ng-click="showAddForm()" ng-hide="addFormShow">+</button>
+        <button class="btn btn-sm btn-primary pull-right col-md-1" ng-click="hideAddForm()" ng-show="addFormShow">-</button>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Full Name</th>
+                <th>Nick Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="msg in messages">
+            <td><a href="" ng-click="showContact(msg)">{{msg.email}}</a></td>
+            <td>{{msg.fullname}}</td>
+            <td>{{msg.nickname}}</td>
+            <td>
+                <button class="btn btn-primary btn-success" ng-click="showEditForm(msg)">Update</button>
+                <button class="btn btn-primary btn-danger">Delete</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

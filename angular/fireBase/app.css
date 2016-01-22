@@ -1,0 +1,17 @@
+/* app css stylesheet */
+
+.list-contact h3 {
+  margin: 0px;
+}
+
+.list-contact {
+  margin-top: 15px;
+}
+
+#addContact .error-txt {
+  color: red;
+}
+
+#addContact .error {
+  border: red;
+}
