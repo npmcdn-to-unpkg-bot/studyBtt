@@ -21,7 +21,7 @@
             <label for="fullname">Full Name</label>
             <input type="text" name="fullname" ng-minlength="5" required
                    ng-model="fullname" class="form-control" id="fullname" placeholder="Full Name">
-            <p ng-show="addContactForm.fullname.$error.required && !addContactForm.fullname.$pristine" class="error-txt">Your Email is required.</p>
+            <p ng-show="addContactForm.fullname.$error.required && !addContactForkm.fullname.$pristine" class="error-txt">Your Email is required.</p>
             <p ng-show="addContactForm.fullname.$error.minlength" class="error-txt">Full Name is too short.</p>
         </div>
         <div class="form-group" ng-class="{'has-error' : addContactForm.nickname.$invalid && !addContactForm.nickname.$pristine}">
