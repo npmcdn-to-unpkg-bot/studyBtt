@@ -3,19 +3,24 @@
     <h3>Detail Contact</h3>
     <dl class="dl-horizontal">
         <dt>Email : </dt>
-        <dd>...</dd>
+        <dd>{{email}}</dd>
+        <dt>Full Name : </dt>
+        <dd>{{fullname}}</dd>
+        <dt>Nick Name : </dt>
+        <dd>{{nickname}}</dd>
     </dl>
 </div>
 
 <div class="col-md-12" ng-show="addFormShow">
-    <h3>Add Contact</h3>
-    <form name="addContactForm" id="addContact" ng-submit="addContact()">
+    <h3>{{formName}}</h3>
+    <form name="addContactForm" id="addContact">
         <div class="form-group" ng-class="{'has-error' : addContactForm.email.$invalid && !addContactForm.email.$pristine}">
             <label for="email">Email address</label>
             <input type="email" name="email" ng-minlength="5" required
                    ng-model="email" class="form-control" id="email" placeholder="Email">
             <p ng-show="addContactForm.email.$error.required && !addContactForm.email.$pristine" class="error-txt">Your Email is required.</p>
             <p ng-show="addContactForm.email.$error.minlength" class="error-txt">Email is too short.</p>
+            <p ng-show="addContactForm.email.$error.email" class="error-txt">Email is invalid</p>
         </div>
         <div class="form-group" ng-class="{'has-error' : addContactForm.fullname.$invalid && !addContactForm.fullname.$pristine}">
             <label for="fullname">Full Name</label>
@@ -31,7 +36,8 @@
             <p ng-show="addContactForm.nickname.$error.required && !addContactForm.nickname.$pristine" class="error-txt">Your Email is required.</p>
             <p ng-show="addContactForm.nickname.$error.minlength" class="error-txt">Nickname is too short.</p>
         </div>
-        <button ng-disabled="addContactForm.$invalid" type="submit" class="btn btn-info">Add Contact</button>
+        <button ng-if="formName == 'Add Contact'" ng-click="addContact()" ng-disabled="addContactForm.$invalid" type="submit" class="btn btn-info">{{formName}}</button>
+        <button ng-if="formName == 'Update Contact'" ng-click="updateContact()" ng-disabled="addContactForm.$invalid" type="submit" class="btn btn-info">{{formName}}</button>
     </form>
 </div>
 

@@ -8,7 +8,7 @@ contact.config(['$routeProvider', function ($routeProvider) {
         controller : 'contactController'
     });
 }]);
-contact.controller('contactController', ['$scope', '$firebaseArray', function ($scope, $firebaseArray) {
+contact.controller('contactController', ['$scope', '$firebaseArray', function ($scope, $firebaseArray, Entry) {
     var ref = new Firebase('https://contactfirebase.firebaseio.com/');
     $scope.messages = $firebaseArray(ref);
     $scope.addContact = function () {
@@ -22,8 +22,18 @@ contact.controller('contactController', ['$scope', '$firebaseArray', function ($
         });
     };
 
-    $scope.showEditForm = function (msg) {
+    $scope.updateContract = function (msg) {
+        var entry = Entry.get({ id: $scope.id }, function() {
+            console.log(entry);
+        }); // get() returns a single entry
+    };
 
+    $scope.showEditForm = function (msg) {
+        $scope.showAddForm();
+        $scope.formName = 'Update Contact';
+        $scope.email = msg.email;
+        $scope.fullname= msg.fullname;
+        $scope.nickname = msg.nickname;
     };
 
     $scope.showContact = function (msg) {
@@ -31,13 +41,18 @@ contact.controller('contactController', ['$scope', '$firebaseArray', function ($
         $scope.fullname= msg.fullname;
         $scope.nickname = msg.nickname;
         $scope.contactShow = true;
-
+        $scope.addFormShow = false;
     };
 
     $scope.showAddForm = function () {
+        clearField();
         $scope.addFormShow = true;
+        $scope.contactShow = false;
+        $scope.formName = 'Add Contact';
     };
     $scope.hideAddForm = function () {
+        clearField();
+        $scope.contactShow = false;
         $scope.addFormShow = false;
     };
 
