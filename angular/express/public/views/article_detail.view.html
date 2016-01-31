@@ -1,0 +1,27 @@
+<button-back></button-back>
+<button class="btn btn-danger" ng-click="removeArticle()"><i class="glyphicon glyphicon-trash"></i> Delete</button>
+<div class="panel panel-primary article_detail">
+    <div class="panel-heading">Article Detail</div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-2"><strong>Id : </strong></div>
+            <div class="col-md-6">{{article._id}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-2"><strong>Title : </strong></div>
+            <div class="col-md-6">{{article.title}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-2"><strong>Category : </strong></div>
+            <div class="col-md-6">{{article.category}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-2"><strong>Body : </strong></div>
+            <div class="col-md-6">{{article.body}}</div>
+        </div>
+        <div class="row">
+            <div class="col-md-2"><strong>Date : </strong></div>
+            <div class="col-md-6">{{article.date | date : 'dd/mm/yyyy HH:mm:ss'}}</div>
+        </div>
+    </div>
+</div>
