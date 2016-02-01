@@ -68,5 +68,7 @@ app.controller('ArticleEditCtrl', ['$scope', '$http', '$location', '$routeParams
     $http.put('/articles', data).success(function(data, status){
       console.log('status : '+status);
     });
+	
+	$location.path('/#categories');
   };
 }]);
