@@ -75,7 +75,7 @@ router.put('/', function(req, res, next){
 
 //remove article
 router.delete('/:id', function(req, res, next){
-  var id = res.params.id;
+  var id = req.params.id;
 
   //remove
   Article.removeArticle(id, function(err, article){
@@ -83,8 +83,8 @@ router.delete('/:id', function(req, res, next){
       console.log(err);
     }
 
-    res.location('/articles');
-    res.redirect('/articles');
+    //res.location('/articles');
+    //res.redirect('/articles');
   });
 });
 module.exports = router;

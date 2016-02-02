@@ -17,7 +17,7 @@ app.controller('ArticleDetailCtrl', ['$scope', '$http', '$routeParams', '$locati
     $http.delete('/articles/'+$routeParams.id).success(function(data){
       console.log(data);
     });
-  //  $location.path('/#categories');
+    $location.path('/#categories');
   };
 }]);
 
