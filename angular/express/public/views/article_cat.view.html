@@ -1,0 +1,14 @@
+<button-back></button-back>
+<h3 class="heading">{{category}} Article</h3>
+<div ng-controller="ArticlesCtrl">
+    <div class="row">
+        <div class="col-md-12" ng-repeat="ar in cat_articles | limitTo: 3">
+            <h3>{{ar.title}}</h3>
+            <p>{{ar.body | limitTo: 200}}</p>
+            <a class="btn btn-default" href="#/articles/detail/{{ar._id}}">Read Article</a>
+        </div>
+        <div class="col-md-12" ng-if="cat_articles == false">
+            <h2>No Articles to display</h2>
+        </div>
+    </div>
+</div>

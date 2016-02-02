@@ -1,0 +1,29 @@
+<h3 class="heading">Categories</h3>
+<div ng-controller="CategoryCtrl">
+    <div class="row">
+        <div class="col-md-4" ng-repeat="category in categories">
+            <h3>{{category.name}}</h3>
+            <p>{{category.description}}</p>
+            <a href="#/articles/category/{{category.name}}">View Detail</a>
+        </div>
+    </div>
+</div>
+
+<h3 class="heading">Lastest Article
+    <a href="/#articles/add" class="btn btn-primary">
+        <i class="glyphicon glyphicon-plus-sign"></i> Add
+    </a>
+</h3>
+<div ng-controller="ArticlesCtrl">
+    <div class="row">
+        <div class="col-md-12" ng-repeat="ar in articles | limitTo: 10">
+            <h3>{{ar.title}}</h3>
+            <p>{{ar.body | limitTo: 200}}</p>
+            <a class="btn btn-info" href="#/articles/detail/{{ar._id}}"><i class="glyphicon glyphicon-eye-open"></i> Read Article</a>
+            <a class="btn btn-warning" href="#/articles/edit/{{ar._id}}"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+        </div>
+        <div ng-if="articles == false">
+            No Articles to display
+        </div>
+    </div>
+</div>

@@ -8,6 +8,9 @@ var cateSchema = mongoose.Schema({
         type: String,
         index: true,
         required: true
+    },
+    description: {
+        type: String
     }
 });
 

@@ -1,8 +1,28 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+footer {
+    background: #222222;
+    color: white;
+    text-align: center;
+    padding: 15px 0px 10px;
+    margin-top: 25px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
-a {
-  color: #00B7FF;
+.ngView {
+    margin-bottom: 100px;
+}
+
+body {
+    position: relative;
+}
+
+.heading {
+    background: #222222;
+    color: white;
+    padding: 5px;
+}
+
+.article_detail {
+    margin-top: 15px;
 }
