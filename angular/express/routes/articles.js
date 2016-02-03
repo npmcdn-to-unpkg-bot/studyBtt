@@ -68,8 +68,8 @@ router.put('/', function(req, res, next){
       console.log(err);
     }
 
-    res.location('/articles');
-    res.redirect('/articles');
+    //res.location('/articles');
+    //res.redirect('/articles');
   });
 });
 
