@@ -34,9 +34,9 @@ function getAccount (accountName) {
     return matchedAccount;
 }
 
-//var accountAdd = ;
-createAccount({
-    name: 'Facebook',
-    username: 'User123',
-    password: '1234567a'
-});
+//createAccount({
+//    name: 'Facebook',
+//    username: 'User123',
+//    password: '1234567a'
+//});
+
