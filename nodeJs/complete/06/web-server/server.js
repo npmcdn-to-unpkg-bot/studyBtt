@@ -4,12 +4,12 @@
 var express = require('express');
 var app = express();
 var PORT = 3000;
+var middleware = require('./middleware');
 
-//app.get('/', function (req, res) {
-//    res.send('Hello Express!')
-//});
 
-app.get('/about', function (req, res) {
+app.use(middleware.logger);
+
+app.get('/about', middleware.requireAuthentication, function (req, res) {
     res.send('Hello About!')
 });
 
