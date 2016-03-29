@@ -5,10 +5,9 @@
     "node": "4.1.1"
   },
   "description": "todo API",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node index.js"
   },
   "author": "truongbt",
   "license": "ISC",
