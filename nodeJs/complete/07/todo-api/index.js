@@ -13,7 +13,7 @@ var todos =[{
     "completed": true
 }, {
     "description": "number Two",
-    "id": 1,
+    "id": 2,
     "completed": false
 }];
 var todoNextId = todos.length;
@@ -26,7 +26,18 @@ app.get('/', function (req, res) {
 
 //GET /todo
 app.get('/todos', function (req, res) {
+    var queryParams = req.query;
+
+    if (queryParams.hasOwnProperty('completed')) {
+        if (queryParams.completed === 'true') {
+            todos = _.where(todos, true);
+        } else {
+            res.status(400).send();
+        }
+    }
     res.json(todos);
+
+
 });
 
 //GET /todo/:id
