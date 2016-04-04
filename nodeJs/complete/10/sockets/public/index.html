@@ -2,19 +2,19 @@
 <head>
     <meta charset="utf-8">
     <title>Socket IO</title>
-    <script src="/js/jquery-1.12.2.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="/js/app.js"></script>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
 </head>
 <body>
 <div class="container">
-    <form id="formChat">
+    <h1>Join chat</h1>
+    <form action="chat.html" id="login">
         <div class="form-group">
-            <label for="message">Email address</label>
-            <input id="message" type="text" class="form-control" name="message">
+            <label for="name">Email</label>
+            <input type="text" class="form-control" name="name" id="name"/>
+            <label for="room">Room</label>
+            <input type="text" class="form-control" name="room" id="room"/>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button class="btn btn-primary">Join chat</button>
     </form>
 </div>
 </body>
