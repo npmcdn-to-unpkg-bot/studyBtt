@@ -7,24 +7,28 @@ var room = getQueryVariable('room');
 
 console.log(name + " wants to join " + room);
 
-socket.on('connect', function() {
+socket.on('connect', function () {
     console.log('User connected via socket.iso Client');
+    socket.emit('joinRoom', {
+        name: name,
+        room: room
+    });
 });
 
-socket.on('messageSend', function(message) {
+socket.on('messageSend', function (message) {
     var momentTimestamp = moment.utc(message.timestamp);
     $("#chat").append(
-        "<p class='well'>"+
-        "<b>"+momentTimestamp.local().format('hh:mm a')+"</b> - "+
-        "<i>"+message.name+"</i> : "+
-        message.contentMessage+
+        "<p class='well'>" +
+        "<b>" + momentTimestamp.local().format('hh:mm a') + "</b> - " +
+        "<i>" + message.name + "</i> : " +
+        message.contentMessage +
         "</p>"
     );
 });
 
-$(document).ready(function() {
+$(document).ready(function () {
     $("h1.room-name").text(room);
-    $("#formChat").submit(function(event) {
+    $("#formChat").submit(function (event) {
         event.preventDefault();
         socket.emit('messageReceive', {
             contentMessage: $(this).find('input[name=message]').val(),

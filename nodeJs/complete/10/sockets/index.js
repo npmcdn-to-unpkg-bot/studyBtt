@@ -12,15 +12,30 @@ app.use(express.static(__dirname + "/public"));
 app.use('/bootstrap', express.static(__dirname + "/node_modules/bootstrap/dist"));
 app.use('/moment', express.static(__dirname + "/node_modules/moment"));
 
-io.on('connection', function(socket) {
+var clientInfo = {};
+
+io.on('connection', function (socket) {
     console.log('User connected via socket.iso');
 
     socket.on('messageReceive', function (message) {
         console.log('Message received: ' + message.contentMessage);
 
-        //socket.broadcast.emit('messageSend', message);
         message.timestamp = moment().valueOf();
-        io.emit('messageSend', message);
+        //socket.broadcast.emit('messageSend', message); // send other user
+        //io.emit('messageSend', message); // send all user
+        io.to(clientInfo[socket.id].room).emit('messageSend', message); // send all user in room
+        //socket.emit('messageSend', message); // only send current user
+    });
+
+    socket.on('joinRoom', function (req) {
+        console.log(clientInfo);
+        clientInfo[socket.id] = req;
+        socket.join(req.room);
+        socket.broadcast.to(req.room).emit('messageSend', {
+            timestamp: moment().valueOf(),
+            name: 'System',
+            contentMessage: req.name + 'has joined!'
+        });
     });
 
     socket.emit('messageSend', {
