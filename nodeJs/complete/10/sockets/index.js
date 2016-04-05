@@ -28,14 +28,27 @@ io.on('connection', function (socket) {
     });
 
     socket.on('joinRoom', function (req) {
-        console.log(clientInfo);
         clientInfo[socket.id] = req;
         socket.join(req.room);
         socket.broadcast.to(req.room).emit('messageSend', {
             timestamp: moment().valueOf(),
             name: 'System',
-            contentMessage: req.name + 'has joined!'
+            contentMessage: req.name + ' has joined!'
         });
+    });
+
+    socket.on('disconnect', function() {
+        console.log('disconnect');
+        var userData = clientInfo[socket.id];
+        if (typeof userData !== 'undefined') {
+            socket.leave(userData.room);
+            io.to(userData.room).emit('messageSend', {
+                name: 'System',
+                contentMessage: userData.name + ' has left!',
+                timestamp: moment().valueOf()
+            });
+            delete clientInfo[socket.id];
+        }
     });
 
     socket.emit('messageSend', {
