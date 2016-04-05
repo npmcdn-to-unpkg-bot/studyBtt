@@ -7,6 +7,7 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var moment = require('moment');
+var _ = require('underscore');
 
 app.use(express.static(__dirname + "/public"));
 app.use('/bootstrap', express.static(__dirname + "/node_modules/bootstrap/dist"));
@@ -14,17 +15,43 @@ app.use('/moment', express.static(__dirname + "/node_modules/moment"));
 
 var clientInfo = {};
 
+//send current users to provided socket
+//improve : @private
+function sendCurrentUsers (socket) {
+    var info = clientInfo[socket.id];
+    var returnUser = [];
+
+    if (typeof info === 'undefined') {
+        return;
+    } else {
+        _.each(clientInfo, function (value, key) {
+            if (value.room === info.room) {
+                returnUser.push(value.name);
+            }
+        });
+        socket.emit('messageSend', {
+            contentMessage: "Current user : " + returnUser.join(', '),
+            timestamp: moment().valueOf(),
+            name: "System"
+        })
+    }
+}
+
 io.on('connection', function (socket) {
     console.log('User connected via socket.iso');
 
     socket.on('messageReceive', function (message) {
         console.log('Message received: ' + message.contentMessage);
 
-        message.timestamp = moment().valueOf();
-        //socket.broadcast.emit('messageSend', message); // send other user
-        //io.emit('messageSend', message); // send all user
-        io.to(clientInfo[socket.id].room).emit('messageSend', message); // send all user in room
-        //socket.emit('messageSend', message); // only send current user
+        if (message.contentMessage === '@currentUsers') {
+            sendCurrentUsers(socket);
+        } else {
+            message.timestamp = moment().valueOf();
+            //socket.broadcast.emit('messageSend', message); // send other user
+            //io.emit('messageSend', message); // send all user
+            io.to(clientInfo[socket.id].room).emit('messageSend', message); // send all user in room
+            //socket.emit('messageSend', message); // only send current user
+        }
     });
 
     socket.on('joinRoom', function (req) {
