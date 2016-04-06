@@ -18,11 +18,14 @@ socket.on('connect', function () {
 socket.on('messageSend', function (message) {
     var momentTimestamp = moment.utc(message.timestamp);
     $("#chat").append(
-        "<p class='well'>" +
-        "<b>" + momentTimestamp.local().format('hh:mm a') + "</b> - " +
-        "<i>" + message.name + "</i> : " +
-        message.contentMessage +
-        "</p>"
+        "<div class='message'>" +
+        "<img src='http://api.randomuser.me/portraits/med/men/66.jpg'>" +
+        //"<b>" + momentTimestamp.local().format('hh:mm a') + "</b> - " +
+        //"<i>" + message.name + "</i> : " +
+        "<div class='wrap-content'>" +
+            "<p class='username'>" + message.name + "</p>" +
+            "<div class='wrap-message'><p>" + message.contentMessage + "</p></div>" +
+        "</div></div>"
     );
 });
 
