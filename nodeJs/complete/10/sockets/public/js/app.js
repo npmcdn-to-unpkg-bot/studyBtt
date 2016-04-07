@@ -5,8 +5,6 @@ var socket = io();
 var name = getQueryVariable('name') || 'Annoymous';
 var room = getQueryVariable('room');
 
-console.log(name + " wants to join " + room);
-
 socket.on('connect', function () {
     console.log('User connected via socket.iso Client');
     socket.emit('joinRoom', {
@@ -15,22 +13,31 @@ socket.on('connect', function () {
     });
 });
 
+socket.on('userOnline', function (message) {
+    var listUser = message.listUser;
+    var text = '<a href="#" class="list-group-item active">List user Online <span class="badge">' + message.total + '</span></a>';
+    $.each(listUser, function (key, value) {
+        text+= '<a href="#" class="list-group-item">' + value.name + '</a>';
+    });
+    $(".user-online .list-group").html(text);
+});
+
 socket.on('messageSend', function (message) {
     var momentTimestamp = moment.utc(message.timestamp);
     $("#chat").append(
         "<div class='message'>" +
         "<img src='http://api.randomuser.me/portraits/med/men/66.jpg'>" +
-        //"<b>" + momentTimestamp.local().format('hh:mm a') + "</b> - " +
-        //"<i>" + message.name + "</i> : " +
+            //"<b>" + momentTimestamp.local().format('hh:mm a') + "</b> - " +
+            //"<i>" + message.name + "</i> : " +
         "<div class='wrap-content'>" +
-            "<p class='username'>" + message.name + "</p>" +
-            "<div class='wrap-message'><p>" + message.contentMessage + "</p></div>" +
+        "<p class='username'>" + message.name + "</p>" +
+        "<div class='wrap-message'><p>" + message.contentMessage + "</p></div>" +
         "</div></div>"
     );
 });
 
 $(document).ready(function () {
-    $("h1.room-name").text(room);
+    $("h1.room-name").text("Group :" + room);
     $("#formChat").submit(function (event) {
         event.preventDefault();
         socket.emit('messageReceive', {
@@ -38,23 +45,6 @@ $(document).ready(function () {
             name: name
         });
         $(this).find('input[name=message]').val('');
-    });
-
-    var test = {};
-    test['number1'] = {
-        name: 'truongbt',
-        age: 18
-    };
-    test['number2'] = {
-        name: 'dung',
-        age: 19
-    };
-    test['number3'] = {
-        name: 'ly',
-        age: 7
-    };
-    $.each(test, function (key, value) {
-        console.log(key + " : " + value);
     });
 });
 

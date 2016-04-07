@@ -7,6 +7,7 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var moment = require('moment');
+var custom = require('./public/custom.js');
 var _ = require('underscore');
 
 app.use(express.static(__dirname + "/public"));
@@ -15,36 +16,23 @@ app.use('/moment', express.static(__dirname + "/node_modules/moment"));
 
 var clientInfo = {};
 
-//send current users to provided socket
-//improve : @private
-function sendCurrentUsers (socket) {
-    var info = clientInfo[socket.id];
-    var returnUser = [];
-
-    if (typeof info === 'undefined') {
-        return;
-    } else {
-        _.each(clientInfo, function (value, key) {
-            if (value.room === info.room) {
-                returnUser.push(value.name);
-            }
-        });
-        socket.emit('messageSend', {
-            contentMessage: "Current user : " + returnUser.join(', '),
-            timestamp: moment().valueOf(),
-            name: "System"
-        })
-    }
-}
-
 io.on('connection', function (socket) {
     console.log('User connected via socket.iso');
 
-    socket.on('messageReceive', function (message) {
-        console.log('Message received: ' + message.contentMessage);
+    socket.emit('messageSend', {
+        contentMessage: "welcome to chat application",
+        timestamp: moment().valueOf(),
+        name: "System"
+    });
 
+    socket.on('messageReceive', function (message) {
         if (message.contentMessage === '@currentUsers') {
-            sendCurrentUsers(socket);
+            var listCurrentUser = custom.listCurrentUser(socket, clientInfo);
+            socket.emit('messageSend', {
+                contentMessage: "Current user : " + listCurrentUser.join(', '),
+                timestamp: moment().valueOf(),
+                name: "System"
+            });
         } else {
             message.timestamp = moment().valueOf();
             //socket.broadcast.emit('messageSend', message); // send other user
@@ -57,10 +45,9 @@ io.on('connection', function (socket) {
     socket.on('joinRoom', function (req) {
         clientInfo[socket.id] = req;
         socket.join(req.room);
-        socket.broadcast.to(req.room).emit('messageSend', {
-            timestamp: moment().valueOf(),
-            name: 'System',
-            contentMessage: req.name + ' has joined!'
+        io.to(req.room).emit('userOnline', {
+            listUser: clientInfo,
+            total: _.size(clientInfo)
         });
     });
 
@@ -69,19 +56,12 @@ io.on('connection', function (socket) {
         var userData = clientInfo[socket.id];
         if (typeof userData !== 'undefined') {
             socket.leave(userData.room);
-            io.to(userData.room).emit('messageSend', {
-                name: 'System',
-                contentMessage: userData.name + ' has left!',
-                timestamp: moment().valueOf()
-            });
             delete clientInfo[socket.id];
+            io.to(userData.room).emit('userOnline', {
+                listUser: clientInfo,
+                total: _.size(clientInfo)
+            });
         }
-    });
-
-    socket.emit('messageSend', {
-        contentMessage: "welcome to chat application",
-        timestamp: moment().valueOf(),
-        name: "System"
     });
 });
 

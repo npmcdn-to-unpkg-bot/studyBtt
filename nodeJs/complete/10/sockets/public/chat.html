@@ -12,21 +12,44 @@
 <body>
 <div class="container">
     <a href="index.html">Chat setting</a>
+
     <h1 class="room-name"></h1>
+
     <div class="chat-container">
-        <div class="screen">
+        <div class="screen col-md-12 no-padding-left-right">
             <div id="chat" class="chat col-md-8"></div>
-            <div class="col-md-4 user-online"></div>
-            <div class="clear-both"></div>
+            <div class="col-md-4 user-online no-padding-right">
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">List user Online</a>
+                    <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+                    <a href="#" class="list-group-item">Morbi leo risus</a>
+                    <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+                    <a href="#" class="list-group-item">Vestibulum at eros</a>
+                    <a href="#" class="list-group-item">Vestibulum at eros</a>
+                    <a href="#" class="list-group-item">Vestibulum at eros</a>
+                    <a href="#" class="list-group-item">Vestibulum at eros</a>
+                    <a href="#" class="list-group-item">Vestibulum at eros</a>
+                    <a href="#" class="list-group-item">Vestibulum at eros</a>
+                    <a href="#" class="list-group-item">Vestibulum at eros</a>
+                    <a href="#" class="list-group-item">Vestibulum at eros</a>
+                    <a href="#" class="list-group-item">Vestibulum at eros</a>
+                    <a href="#" class="list-group-item">Vestibulum at eros</a>
+                    <a href="#" class="list-group-item">Vestibulum at eros</a>
+                    <a href="#" class="list-group-item">Vestibulum at eros</a>
+                    <a href="#" class="list-group-item">Vestibulum at eros</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 no-padding-left-right">
+            <form id="formChat">
+                <div class="form-group">
+                    <label for="message">Email address</label>
+                    <input id="message" type="text" class="form-control" name="message">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </div>
         <div class="clear-both"></div>
-        <form id="formChat">
-            <div class="form-group">
-                <label for="message">Email address</label>
-                <input id="message" type="text" class="form-control" name="message">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
     </div>
 </div>
 </body>

@@ -1,8 +1,22 @@
+/*common*/
 .vertical-center {
     display: flex;
     align-items: center;
     min-height: 90vh;
     margin: 0;
+}
+
+.no-padding-right {
+    padding-right: 0px;
+}
+
+.no-padding-left-right {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.clear-both {
+    clear: both;
 }
 
 /*layout chat*/
@@ -56,8 +70,7 @@
 
 .chat {
     display: block;
-    /*width: 100%;*/
-    height: 100%;
+    height: 500px;
     overflow-y: scroll;
     overflow-x: hidden;
     background: #eee;
@@ -87,20 +100,33 @@
     top: -20px;
 }
 
-.screen .user-online {
-    height: 100%;
-    background: #9b59b6;
-}
-
 .screen {
-    height: 500px;
     margin-bottom: 20px;
 }
 
 #formChat label {
-    color: white;
+color: white;
 }
 
-.clear-both {
-    clear: both;
+.user-online {
+    max-height: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.user-online .list-group .active {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.user-online .list-group {
+    margin-bottom: 0px;
+}
+
+/*screen*/
+@media (max-width: 992px) {
+    .user-online {
+        padding-left: 0px;
+        margin-top: 20px;
+    }
 }
