@@ -6,7 +6,6 @@ var name = getQueryVariable('name') || 'Annoymous';
 var room = getQueryVariable('room');
 
 socket.on('connect', function () {
-    console.log('User connected via socket.iso Client');
     socket.emit('joinRoom', {
         name: name,
         room: room
@@ -15,9 +14,10 @@ socket.on('connect', function () {
 
 socket.on('userOnline', function (message) {
     var listUser = message.listUser;
+    console.log(listUser);
     var text = '<a href="#" class="list-group-item active">List user Online <span class="badge">' + message.total + '</span></a>';
     $.each(listUser, function (key, value) {
-        text+= '<a href="#" class="list-group-item">' + value.name + '</a>';
+        text += '<a href="#" data-socket-id="' + key + '" class="list-group-item">' + value.name + '</a>';
     });
     $(".user-online .list-group").html(text);
 });

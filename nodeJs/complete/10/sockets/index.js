@@ -17,8 +17,6 @@ app.use('/moment', express.static(__dirname + "/node_modules/moment"));
 var clientInfo = {};
 
 io.on('connection', function (socket) {
-    console.log('User connected via socket.iso');
-
     socket.emit('messageSend', {
         contentMessage: "welcome to chat application",
         timestamp: moment().valueOf(),
@@ -27,7 +25,7 @@ io.on('connection', function (socket) {
 
     socket.on('messageReceive', function (message) {
         if (message.contentMessage === '@currentUsers') {
-            var listCurrentUser = custom.listCurrentUser(socket, clientInfo);
+            var listCurrentUser = custom.listUserRoomates(socket, clientInfo);
             socket.emit('messageSend', {
                 contentMessage: "Current user : " + listCurrentUser.join(', '),
                 timestamp: moment().valueOf(),
@@ -45,21 +43,22 @@ io.on('connection', function (socket) {
     socket.on('joinRoom', function (req) {
         clientInfo[socket.id] = req;
         socket.join(req.room);
+        var listUserRoomates = custom.findAllUserRoomates(req.room, clientInfo);
         io.to(req.room).emit('userOnline', {
-            listUser: clientInfo,
-            total: _.size(clientInfo)
+            listUser: listUserRoomates,
+            total: _.size(listUserRoomates)
         });
     });
 
-    socket.on('disconnect', function() {
-        console.log('disconnect');
+    socket.on('disconnect', function () {
         var userData = clientInfo[socket.id];
         if (typeof userData !== 'undefined') {
             socket.leave(userData.room);
             delete clientInfo[socket.id];
+            var listUserRoomates = custom.findAllUserRoomates(userData.room, clientInfo);
             io.to(userData.room).emit('userOnline', {
-                listUser: clientInfo,
-                total: _.size(clientInfo)
+                listUser: listUserRoomates,
+                total: _.size(listUserRoomates)
             });
         }
     });
