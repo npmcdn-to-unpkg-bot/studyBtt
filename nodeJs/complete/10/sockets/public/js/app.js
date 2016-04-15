@@ -14,17 +14,18 @@ socket.on('connect', function () {
 
 socket.on('userOnline', function (message) {
     var listUser = message.listUser;
-    console.log(listUser);
     var text = '<a href="#" class="list-group-item active">List user Online <span class="badge">' + message.total + '</span></a>';
+    text += "<a href='#' class='list-group-item' onclick='chatPrivate(this)' data-socket-name='chatRoom' data-socket-id='chatRoom'>All in Room</a>";
     $.each(listUser, function (key, value) {
-        text += '<a href="#" data-socket-id="' + key + '" class="list-group-item">' + value.name + '</a>';
+        text += '<a href="#" onclick="chatPrivate(this)" data-socket-name="' + value.name + '" data-socket-id="' + key + '" class="list-group-item">' + value.name + '</a>';
+
     });
     $(".user-online .list-group").html(text);
 });
 
 socket.on('messageSend', function (message) {
     var momentTimestamp = moment.utc(message.timestamp);
-    $("#chat").append(
+    $("#chatRoom").append(
         "<div class='message'>" +
         "<img src='http://api.randomuser.me/portraits/med/men/66.jpg'>" +
             //"<b>" + momentTimestamp.local().format('hh:mm a') + "</b> - " +
@@ -59,4 +60,21 @@ function getQueryVariable(variable) {
     }
 
     return undefined;
+}
+
+function chatPrivate(_this) {
+    var dataSocketId = $(_this).attr('data-socket-id').replace('/#', '');
+    var dataSocketName = $(_this).attr('data-socket-name').replace('/#', '');
+    if (!$("#" + dataSocketId).length) {
+        $("#chat").append('<div id="' + dataSocketId + '">' +
+            '<div class="message">'+
+                '<img src="http://api.randomuser.me/portraits/med/men/66.jpg">'+
+                '<div class="wrap-content">'+
+                    '<p class="username">System</p>'+
+                    '<div class="wrap-message"><p>Let\' chat with ' + dataSocketName+ '</p>' +
+                '</div>' +
+            '</div></div></div>');
+    }
+    $("#chat").children().hide(300);
+    $("#" + dataSocketId).show(300);
 }

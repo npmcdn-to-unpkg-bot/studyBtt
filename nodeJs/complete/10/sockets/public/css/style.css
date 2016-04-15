@@ -75,6 +75,7 @@
     overflow-x: hidden;
     background: #eee;
     border-radius: 4px;
+    transition-duration: 2s;
 }
 
 .chat-container {

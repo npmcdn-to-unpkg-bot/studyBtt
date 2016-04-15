@@ -22,7 +22,7 @@ module.exports.listUserRoomates = function (socket, clientInfo) {
 };
 
 module.exports.findAllUserRoomates = function (roomName, clientInfo) {
-    var returnUser = [];
+    var returnUser = {};
     _.each(clientInfo, function (value, key) {
         if (value.room === roomName) {
             var json = {
