@@ -124,6 +124,12 @@ color: white;
     margin-bottom: 0px;
 }
 
+.list-group .chatting, .list-group .chatting:hover, .list-group .chatting:focus {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
 /*screen*/
 @media (max-width: 992px) {
     .user-online {

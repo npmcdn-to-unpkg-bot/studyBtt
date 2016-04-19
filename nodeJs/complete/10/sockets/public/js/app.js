@@ -17,7 +17,7 @@ socket.on('userOnline', function (message) {
     var text = '<a href="#" class="list-group-item active">List user Online <span class="badge">' + message.total + '</span></a>';
     text += "<a href='#' class='list-group-item' onclick='chatPrivate(this)' data-socket-name='chatRoom' data-socket-id='chatRoom'>All in Room</a>";
     $.each(listUser, function (key, value) {
-        text += '<a href="#" onclick="chatPrivate(this)" data-socket-name="' + value.name + '" data-socket-id="' + key + '" class="list-group-item">' + value.name + '</a>';
+        text += '<a href="#" onclick="switchChat(this)" data-socket-name="' + value.name + '" data-socket-id="' + key + '" class="list-group-item">' + value.name + '</a>';
 
     });
     $(".user-online .list-group").html(text);
@@ -62,7 +62,7 @@ function getQueryVariable(variable) {
     return undefined;
 }
 
-function chatPrivate(_this) {
+function switchChat(_this) {
     var dataSocketId = $(_this).attr('data-socket-id').replace('/#', '');
     var dataSocketName = $(_this).attr('data-socket-name').replace('/#', '');
     if (!$("#" + dataSocketId).length) {
@@ -77,4 +77,6 @@ function chatPrivate(_this) {
     }
     $("#chat").children().hide(300);
     $("#" + dataSocketId).show(300);
+    $(".list-group a").removeClass("chatting");
+    $(_this).addClass('chatting');
 }
