@@ -15,9 +15,13 @@ socket.on('connect', function () {
 socket.on('userOnline', function (message) {
     var listUser = message.listUser;
     var text = '<a href="#" class="list-group-item active">List user Online <span class="badge">' + message.total + '</span></a>';
-    text += "<a href='#' class='list-group-item' onclick='chatPrivate(this)' data-socket-name='chatRoom' data-socket-id='chatRoom'>All in Room</a>";
+    text += "<a href='#' class='list-group-item' onclick='switchChat(this)' data-socket-name='chatRoom' data-socket-id='chatRoom'>All in Room</a>";
     $.each(listUser, function (key, value) {
-        text += '<a href="#" onclick="switchChat(this)" data-socket-name="' + value.name + '" data-socket-id="' + key + '" class="list-group-item">' + value.name + '</a>';
+        key = key.replace('/#', '');
+        if (key == socket.id)
+            text += '<a href="#" disable data-socket-name="' + value.name + '" data-socket-id="' + key + '" class="list-group-item disabled">' + value.name + '</a>';
+        else
+            text += '<a href="#" onclick="switchChat(this)" data-socket-name="' + value.name + '" data-socket-id="' + key + '" class="list-group-item">' + value.name + '</a>';
 
     });
     $(".user-online .list-group").html(text);
@@ -37,14 +41,33 @@ socket.on('messageSend', function (message) {
     );
 });
 
+socket.on('chatPrivateSend', function (message) {
+    console.log(socket.id + " : " + message.timestamp);
+});
+
 $(document).ready(function () {
     $("h1.room-name").text("Group :" + room);
     $("#formChat").submit(function (event) {
         event.preventDefault();
-        socket.emit('messageReceive', {
-            contentMessage: $(this).find('input[name=message]').val(),
-            name: name
-        });
+        var chatting = $(".list-group a.chatting").attr('data-socket-id');
+        if (typeof chatting === "undefined") {
+            alert('please select group or person to chat');
+            return;
+        }
+
+        // chat all group
+        if (chatting == "chatRoom") {
+            socket.emit('messageReceive', {
+                contentMessage: $(this).find('input[name=message]').val(),
+                name: name
+            });
+        } else {
+            socket.emit('chatPrivateReceive', {
+                contentMessage: $(this).find('input[name=message]').val(),
+                from: "/#" + socket.id,
+                to: "/#" + chatting
+            });
+        }
         $(this).find('input[name=message]').val('');
     });
 });
@@ -63,8 +86,8 @@ function getQueryVariable(variable) {
 }
 
 function switchChat(_this) {
-    var dataSocketId = $(_this).attr('data-socket-id').replace('/#', '');
-    var dataSocketName = $(_this).attr('data-socket-name').replace('/#', '');
+    var dataSocketId = $(_this).attr('data-socket-id');
+    var dataSocketName = $(_this).attr('data-socket-name');
     if (!$("#" + dataSocketId).length) {
         $("#chat").append('<div id="' + dataSocketId + '">' +
             '<div class="message">'+

@@ -40,6 +40,17 @@ io.on('connection', function (socket) {
         }
     });
 
+    socket.on('chatPrivateReceive', function (message) {
+        message.timestamp = moment().valueOf();
+        // send to user chat
+        message.name = clientInfo[socket.id].name;
+        io.to(message.from).emit('chatPrivateSend', message);
+
+        //send to user receive
+        message.name = clientInfo[socket.id].name;
+        io.to(message.to).emit('chatPrivateSend', message);
+    });
+
     socket.on('joinRoom', function (req) {
         clientInfo[socket.id] = req;
         socket.join(req.room);
