@@ -20,8 +20,10 @@ socket.on('userOnline', function (message) {
         key = key.replace('/#', '');
         if (key == socket.id)
             text += '<a href="#" disable data-socket-name="' + value.name + '" data-socket-id="' + key + '" class="list-group-item disabled">' + value.name + '</a>';
-        else
+        else {
+            createScreenChat(key, value.name);
             text += '<a href="#" onclick="switchChat(this)" data-socket-name="' + value.name + '" data-socket-id="' + key + '" class="list-group-item">' + value.name + '</a>';
+        }
 
     });
     $(".user-online .list-group").html(text);
@@ -42,7 +44,17 @@ socket.on('messageSend', function (message) {
 });
 
 socket.on('chatPrivateSend', function (message) {
-    console.log(socket.id + " : " + message.timestamp);
+    var screenChat = message.from.replace('/#', '');
+    $("#" + screenChat).append(
+        "<div class='message'>" +
+        "<img src='http://api.randomuser.me/portraits/med/men/66.jpg'>" +
+            //"<b>" + momentTimestamp.local().format('hh:mm a') + "</b> - " +
+            //"<i>" + message.name + "</i> : " +
+        "<div class='wrap-content'>" +
+        "<p class='username'>" + message.name + "</p>" +
+        "<div class='wrap-message'><p>" + message.contentMessage + "</p></div>" +
+        "</div></div>"
+    );
 });
 
 $(document).ready(function () {
@@ -62,11 +74,23 @@ $(document).ready(function () {
                 name: name
             });
         } else {
+            var contentMessage = $(this).find('input[name=message]').val();
             socket.emit('chatPrivateReceive', {
-                contentMessage: $(this).find('input[name=message]').val(),
+                contentMessage: contentMessage,
                 from: "/#" + socket.id,
                 to: "/#" + chatting
             });
+
+            $("#" + chatting).append(
+                "<div class='message me'>" +
+                "<img src='http://api.randomuser.me/portraits/med/men/66.jpg'>" +
+                    //"<b>" + momentTimestamp.local().format('hh:mm a') + "</b> - " +
+                    //"<i>" + message.name + "</i> : " +
+                "<div class='wrap-content'>" +
+                "<p class='username'>" + name + "</p>" +
+                "<div class='wrap-message'><p>" + contentMessage + "</p></div>" +
+                "</div></div>"
+            );
         }
         $(this).find('input[name=message]').val('');
     });
@@ -87,19 +111,26 @@ function getQueryVariable(variable) {
 
 function switchChat(_this) {
     var dataSocketId = $(_this).attr('data-socket-id');
-    var dataSocketName = $(_this).attr('data-socket-name');
-    if (!$("#" + dataSocketId).length) {
-        $("#chat").append('<div id="' + dataSocketId + '">' +
-            '<div class="message">'+
-                '<img src="http://api.randomuser.me/portraits/med/men/66.jpg">'+
-                '<div class="wrap-content">'+
-                    '<p class="username">System</p>'+
-                    '<div class="wrap-message"><p>Let\' chat with ' + dataSocketName+ '</p>' +
-                '</div>' +
-            '</div></div></div>');
-    }
+
     $("#chat").children().hide(300);
     $("#" + dataSocketId).show(300);
     $(".list-group a").removeClass("chatting");
     $(_this).addClass('chatting');
+}
+
+function createScreenChat (socketId, socketName) {
+    if (!$("#" + socketId).length) {
+        $("#chat").append('<div style="display: none" id="' + socketId + '">' +
+            '<div class="message">'+
+            '<img src="http://api.randomuser.me/portraits/med/men/66.jpg">'+
+            '<div class="wrap-content">'+
+            '<p class="username">System</p>'+
+            '<div class="wrap-message"><p>Let\' chat with ' + socketName+ '</p>' +
+            '</div>' +
+            '</div></div></div>');
+    }
+}
+
+function appendChat () {
+
 }
