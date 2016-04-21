@@ -1,0 +1,20 @@
+{
+  "name": "userStory",
+  "version": "1.0.0",
+  "description": "User story app",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "author": "truongbt",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "jsonwebtoken": "^5.7.0",
+    "mongoose": "^4.4.12",
+    "morgan": "^1.7.0",
+    "nodemon": "^1.9.1"
+  }
+}
