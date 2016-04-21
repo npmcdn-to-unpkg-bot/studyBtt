@@ -1,0 +1,23 @@
+{
+  "name": "sockets",
+  "version": "1.0.0",
+  "engines": {
+    "node": "4.1.1"
+  },
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "truongbt",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "bootstrap": "^3.3.6",
+    "express": "^4.13.4",
+    "moment": "^2.12.0",
+    "nodemon": "^1.9.1",
+    "socket.io": "^1.4.5",
+    "underscore": "^1.8.3"
+  }
+}

@@ -1,0 +1,42 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Socket IO</title>
+    <script src="/js/jquery-1.12.2.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/moment/moment.js"></script>
+    <script src="/js/app.js"></script>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+    <a href="index.html">Chat setting</a>
+
+    <h1 class="room-name"></h1>
+
+    <div class="chat-container">
+        <div class="screen col-md-12 no-padding-left-right">
+            <div id="chat" class="chat col-md-8">
+                <div id="chatRoom"></div>
+            </div>
+            <div class="col-md-4 user-online no-padding-right">
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">List user Online</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 no-padding-left-right">
+            <form id="formChat">
+                <div class="form-group">
+                    <label for="message">Email address</label>
+                    <input id="message" type="text" class="form-control" name="message">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div class="clear-both"></div>
+    </div>
+</div>
+</body>
+</html>
