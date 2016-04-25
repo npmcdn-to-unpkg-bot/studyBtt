@@ -75,8 +75,8 @@ module.exports = function (app, express) {
         });
     });
 // code chạy từ trên xuống dưới - nếu bê cái middleware này lên đâu thì thằng users cũng dính
-    api.use(function(req, res, next) {
-        console.log("Somebody just came to out app!");
+    api.use('/', function(req, res, next) {
+        console.log("Somebody just came to our app!");
         var token = req.body.token || req.param('token') || req.headers['x-access-token'];
 
         //check if token exist
@@ -109,11 +109,20 @@ module.exports = function (app, express) {
 
             res.json({message: "New Story Created!"});
         });
+    })
+    .get(function(req, res) {
+        Story.find({creator: req.decoded.id}, function(err, stories) {
+            if (err) {
+                res.send(err);
+                return;
+            }
+
+            res.json(stories);
+        });
     });
 
-    api.get('/', function (req, res) {
-        res.json("Hello world!");
+    api.get('/me', function (req, res ) {
+        res.json(req.decoded);
     });
-
     return api;
 };
