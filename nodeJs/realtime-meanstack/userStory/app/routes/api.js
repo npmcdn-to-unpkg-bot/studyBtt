@@ -57,12 +57,18 @@ module.exports = function (app, express) {
             if (err) throw err;
 
             if (!user) {
-                res.send({message: "User doesn't exits"});
+                res.send({
+                    success: false,
+                    message: "User doesn't exits"
+                });
             } else {
                 var validPassword = user.comparePassword(req.body.password);
 
                 if (!validPassword) {
-                    res.send({message: "Invalid Password"});
+                    res.send({
+                        success: false,
+                        message: "Invalid Password"
+                    });
                 } else {
                     var token = createToken(user);
                     res.json({
@@ -90,7 +96,7 @@ module.exports = function (app, express) {
                 }
             });
         } else {
-            res.status(403).send({success: false, message: "No Token Provided"});
+            res.status(403).json({success: false, message: "No Token Provided"});
         }
     });
 

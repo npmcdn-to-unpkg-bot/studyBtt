@@ -10,8 +10,12 @@ angular.module('authService', [])
                 password: password
             })
                 .success(function (data) {
-                    AuthToken.setToken(data.token);
+                    if (data.success)
+                        AuthToken.setToken(data.token);
                     return data;
+                })
+                .error(function (err) {
+                    console.log("Error api/login : " + err);
                 });
         };
 
@@ -25,7 +29,13 @@ angular.module('authService', [])
 
         authFactory.getUser = function () {
             if (AuthToken.getToken()) {
-                return $http.get('/#/api/me');
+                return $http.get('/api/me')
+                    .success(function (success) {
+                        console.log("Success : " + success);
+                    })
+                    .error(function (err) {
+                        console.log("Error : " + err.message);
+                    });
             }
             else {
                 return $q.reject({message: "User has no token"});

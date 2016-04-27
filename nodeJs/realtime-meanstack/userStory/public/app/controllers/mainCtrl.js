@@ -2,34 +2,35 @@
  * Created by Truong on 25-Apr-16.
  */
 angular.module('mainCtrl', [])
-    .controller('MainController', function ($scope, $location, Auth) {
+    .controller('MainController', function ($scope, $location, Auth, Ui, $rootScope) {
         var vm = this;
 
         vm.loggedIn = Auth.isLoggedIn();
-        //$scope.$on('$routeChangeStart', function () {
-        //    vm.loggedIn = Auth.isLoggedIn();
-        //    console.log('change start');
-        //    Auth.getUser().then(function (data) {
-        //        vm.user = data.data;
-        //    }, function (err) {
-        //        console.log('Error : ' + err);
-        //    });
-        //});
+        $scope.$on('$routeChangeStart', function () {
+            vm.loggedIn = Auth.isLoggedIn();
+            Auth.getUser().then(function (data) {
+                vm.user = data.data;
+            }, function (err) {
+                Ui.showMessage(err.data.message);
+                console.log('Error ChangeStart : ' + err.data.message);
+                vm.error = err.data.message;
+            });
+        });
 
         vm.doLogin = function () {
             vm.processing = true;
             vm.error = '';
             Auth.login(vm.loginData.username, vm.loginData.password)
-                .success(function (data) {
+                .success(function (dataLogin) {
                     vm.processing = false;
 
-                    Auth.getUser().then(function (data) {
-                        vm.user = data.data;
-                    });
-                    if (data.success) {
+                    if (dataLogin.success) {
+                        Auth.getUser().then(function (data) {
+                            vm.user = data.data;
+                        });
                         $location.path('/');
                     } else {
-                        vm.error = data.message;
+                        vm.error = dataLogin.message;
                     }
                 });
         };
