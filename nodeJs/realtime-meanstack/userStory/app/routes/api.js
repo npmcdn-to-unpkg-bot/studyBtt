@@ -6,6 +6,7 @@ var Story = require('../models/story');
 var config = require('../../config');
 var secretKey = config.seretKey;
 var jsonwebtoken = require('jsonwebtoken');
+var _ = require('underscore');
 
 function createToken (user) {
     var token = jsonwebtoken.sign({
@@ -29,13 +30,16 @@ module.exports = function (app, express) {
             password: req.body.password
         });
 
-        user.save(function (err) {
+        user.save(function (err, data) {
             if (err) {
                 res.send(err);
                 return;
             }
 
-            res.json({message: 'User has been created!'});
+            res.json({
+                message: 'User has been created!',
+                token: createToken(data)
+            });
         });
     });
 
@@ -53,7 +57,7 @@ module.exports = function (app, express) {
     api.post('/login', function (req, res) {
         User.findOne({
             username: req.body.username
-        }).select('password').exec(function (err, user) {
+        }).select('username password name').exec(function (err, user) {
             if (err) throw err;
 
             if (!user) {

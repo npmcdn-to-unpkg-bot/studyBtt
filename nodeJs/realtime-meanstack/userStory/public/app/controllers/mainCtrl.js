@@ -2,20 +2,31 @@
  * Created by Truong on 25-Apr-16.
  */
 angular.module('mainCtrl', [])
-    .controller('MainController', function ($scope, $location, Auth, Ui, $rootScope) {
+    .controller('MainController', function ($scope, $location, Auth, Ui, $rootScope, $window) {
         var vm = this;
 
         vm.loggedIn = Auth.isLoggedIn();
-        $scope.$on('$routeChangeStart', function () {
+        $scope.$on('$routeChangeStart', function (e, current, pre) {
+            console.log(current.$$route.originalPath);
+            console.log("===================");
             vm.loggedIn = Auth.isLoggedIn();
-            Auth.getUser().then(function (data) {
-                vm.user = data.data;
-            }, function (err) {
-                Ui.showMessage(err.data.message);
-                console.log('Error ChangeStart : ' + err.data.message);
-                vm.error = err.data.message;
-            });
+            if (vm.loggedIn) {
+                Auth.getUser().then(function (data) {
+                    console.log(data.data);
+                    vm.user = data.data;
+                }, function (err) {
+                    Ui.showMessage(err.data.message);
+                    console.log('Error ChangeStart : ' + err.data.message);
+                    vm.error = err.data.message;
+                });
+            }
         });
+
+        vm.dump = function (param) {
+            angular.forEach(param, function (value, key) {
+                console.log("Key : " + key + " value : " + value);
+            })
+        };
 
         vm.doLogin = function () {
             vm.processing = true;
@@ -31,12 +42,13 @@ angular.module('mainCtrl', [])
                         $location.path('/');
                     } else {
                         vm.error = dataLogin.message;
+                        Ui.showMessage(dataLogin.message);
                     }
                 });
         };
 
         vm.doLogout = function () {
             Auth.logout();
-            $location.path('/logout');
+            $location.path('/deohieuvisao');
         };
     });

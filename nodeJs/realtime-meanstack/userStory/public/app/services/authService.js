@@ -31,7 +31,7 @@ angular.module('authService', [])
             if (AuthToken.getToken()) {
                 return $http.get('/api/me')
                     .success(function (success) {
-                        console.log("Success : " + success);
+                        console.log("Success /api/me : " + success.id);
                     })
                     .error(function (err) {
                         console.log("Error : " + err.message);

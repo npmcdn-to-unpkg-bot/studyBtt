@@ -1,7 +1,7 @@
 /**
  * Created by Truong on 25-Apr-16.
  */
-angular.module('userCtrl', ['userService'])
+angular.module('userCtrl', [])
     .controller('UserController', function (User) {
         var vm = this;
         vm.processing = true;
@@ -20,8 +20,10 @@ angular.module('userCtrl', ['userService'])
                     vm.userData = {};
                     vm.messae = response.data.message;
 
-                    $window.localstorage.setItem('token', response.data.token);
+                    $window.localStorage.setItem('token', response.data.token);
                     $location.path('/');
-                })
+                }, function (err) {
+                    console.log('Error create user : ' + err);
+                });
         }
     });
