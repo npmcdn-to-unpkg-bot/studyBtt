@@ -1,0 +1,17 @@
+<div class="" ng-controller="UserCreateController as user">
+    <form method="post" ng-submit="user.signupUser()">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" class="form-control" type="text" name="name" ng-model="user.userData.name">
+        </div>
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input id="username" class="form-control" type="text" name="username" ng-model="user.userData.username">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input id="password" class="form-control" type="text" name="password" ng-model="user.userData.password">
+        </div>
+        <button class="btn btn-success" type="submit">Signup</button>
+    </form>
+</div>

@@ -1,0 +1,24 @@
+{
+  "name": "userStory",
+  "version": "1.0.0",
+  "description": "User story app",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "author": "truongbt",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.5.5",
+    "angular-route": "^1.5.5",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.0",
+    "bootstrap": "^3.3.6",
+    "express": "^4.13.4",
+    "jsonwebtoken": "^5.7.0",
+    "mongoose": "^4.4.12",
+    "morgan": "^1.7.0",
+    "nodemon": "^1.9.1",
+    "underscore": "^1.8.3"
+  }
+}
