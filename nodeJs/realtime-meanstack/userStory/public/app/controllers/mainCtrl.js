@@ -7,12 +7,9 @@ angular.module('mainCtrl', [])
 
         vm.loggedIn = Auth.isLoggedIn();
         $scope.$on('$routeChangeStart', function (e, current, pre) {
-            console.log(current.$$route.originalPath);
-            console.log("===================");
             vm.loggedIn = Auth.isLoggedIn();
             if (vm.loggedIn) {
                 Auth.getUser().then(function (data) {
-                    console.log(data.data);
                     vm.user = data.data;
                 }, function (err) {
                     Ui.showMessage(err.data.message);

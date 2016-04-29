@@ -111,13 +111,16 @@ module.exports = function (app, express) {
             content: req.body.content
         });
 
-        story.save(function (err) {
+        story.save(function (err, story) {
             if (err) {
                 res.send(err);
                 return;
             }
 
-            res.json({message: "New Story Created!"});
+            res.json({
+                message: "New Story Created!",
+                story: story
+            });
         });
     })
     .get(function(req, res) {
