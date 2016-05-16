@@ -12,12 +12,12 @@ class User extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->_data['controller'] = "User";
     }
 
     public function index()
     {
-        $this->_data['action'] = "index";
+        $this->load->model("Muser");
+        $this->_data['listUser'] = $this->Muser->listUser();
         $this->load->view('user/index_view', $this->_data);
     }
 

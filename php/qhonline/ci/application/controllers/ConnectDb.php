@@ -60,4 +60,12 @@ class ConnectDb extends CI_Controller
         $this->db->where("id", 1);
         $this->db->delete("user");
     }
+
+    public function listUser()
+    {
+        $this->load->model("Muser");
+        echo "<pre>";
+        var_dump($this->Muser->listUser());
+        die;
+    }
 }
