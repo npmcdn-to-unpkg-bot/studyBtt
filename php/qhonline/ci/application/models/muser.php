@@ -24,4 +24,24 @@ class Muser extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+
+    public function getUserByName($name)
+    {
+        $this->db->where("name", $name);
+        $this->db->from($this->_table);
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+
+    public function getTotal()
+    {
+        return $this->db->count_all($this->_table);
+    }
+
+    public function listUserPagination($record, $start)
+    {
+        $this->db->limit($record, $start);
+        $query = $this->db->get($this->_table);
+        return $query->result_array();
+    }
 }

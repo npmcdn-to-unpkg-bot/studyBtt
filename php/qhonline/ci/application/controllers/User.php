@@ -16,6 +16,9 @@ class User extends CI_Controller
 
     public function index()
     {
+        $this->load->library("pagination");
+        $this->load->helper("url");
+
         $this->load->model("Muser");
         $this->_data['listUser'] = $this->Muser->listUser();
         $this->load->view('user/index_view', $this->_data);
