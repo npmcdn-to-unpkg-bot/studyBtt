@@ -9,6 +9,7 @@
 class Muser extends CI_Model
 {
     protected $_table = "user";
+
     public function __construct()
     {
         $this->load->database();
@@ -31,6 +32,18 @@ class Muser extends CI_Model
         $this->db->from($this->_table);
         $query = $this->db->get();
         return $query->result_array();
+    }
+
+    public function checkLogin($name, $pass)
+    {
+        $this->db->where("name", $name);
+        $this->db->where("password", $pass);
+        $query = $this->db->get($this->_table);
+        if ($query->num_rows()) {
+            return $query->row_array();
+        } else {
+            return false;
+        }
     }
 
     public function getTotal()
