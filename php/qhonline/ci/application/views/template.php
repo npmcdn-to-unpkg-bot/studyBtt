@@ -1,7 +1,13 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Truong
- * Date: 20-May-16
- * Time: 12:13 AM
- */
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Master Layout</title>
+</head>
+<body>
+
+<div class="top">Banner</div>
+<div class="leftmenu"><?php echo $leftmenu?></div>
+<div class="content"><?php $this->load->view($loadPage) ?></div>
+<div class="bottom">Bottom</div>
+</body>
+</html>

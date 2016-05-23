@@ -12,6 +12,7 @@ class User extends MX_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->_data['leftmenu'] = "Left Menu in module backend";
     }
 
     public function index()

@@ -8,7 +8,7 @@
  */
 class MY_Controller extends CI_Controller
 {
-    protected $_leftMenu;
+    public $_leftMenu;
     public function __construct()
     {
         parent::__construct();

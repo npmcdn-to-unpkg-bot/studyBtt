@@ -33,6 +33,7 @@ class HookExam
     {
         $this->_CI->Zend_Acl->add(new Zend_Acl_Resource("welcome"));
         $this->_CI->Zend_Acl->add(new Zend_Acl_Resource("user"));
+//        $this->_CI->Zend_Acl->add(new Zend_Acl_Resource("MasterLayout"));
     }
 
     public function setAccess()
@@ -46,11 +47,11 @@ class HookExam
     {
         $controller = $this->_CI->router->fetch_class();
         $action = $this->_CI->router->fetch_method();
-        $role = "member";
+        $role = "admin";
         $this->setRoles();
         $this->setResources();
         $this->setAccess();
-        if (!$this->_CI->Zend_Acl->isAllowed($role, $controller, $action)) {
+        if ($this->_CI->Zend_Acl->has($controller) && !$this->_CI->Zend_Acl->isAllowed($role, $controller, $action)) {
             die("access forbidden");
         }
     }
