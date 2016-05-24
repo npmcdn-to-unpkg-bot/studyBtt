@@ -11,10 +11,11 @@ class User extends MX_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->helper("url");
     }
 
     public function index()
     {
-        echo "CI project123";
+        $this->load->view("themeALT/template");
     }
 }
