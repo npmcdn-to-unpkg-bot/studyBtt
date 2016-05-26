@@ -10,6 +10,9 @@ class Muser extends CI_Model
 {
     protected $_table = "user";
     const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 0;
+    const STATUS_DELETE = -1;
+
     public function __construct()
     {
         parent::__construct();
@@ -29,5 +32,16 @@ class Muser extends CI_Model
     public function countAll()
     {
         return $this->db->count_all($this->_table);
+    }
+
+    public static function getStatusUser()
+    {
+        $listStatus = array(
+            self::STATUS_ACTIVE => "Active",
+            self::STATUS_INACTIVE => "Inactive",
+            self::STATUS_DELETE => "Deleted",
+        );
+
+        return $listStatus;
     }
 }
