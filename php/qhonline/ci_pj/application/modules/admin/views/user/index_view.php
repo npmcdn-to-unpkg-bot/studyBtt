@@ -18,6 +18,7 @@
                             <th>Username</th>
                             <th>Fullname</th>
                             <th>Level</th>
+                            <th>Status</th>
                             <th>Created</th>
                             <th>Action</th>
                         </tr>
@@ -28,13 +29,14 @@
                                 <td><?php echo $user['username'] ?></td>
                                 <td><?php echo $user['fullname'] ?></td>
                                 <td><?php echo $user['level_name'] ?></td>
+                                <td><?php echo Muser::getStatusUser($user['status']) ?></td>
                                 <td><?php echo $user['created_at'] ?></td>
                                 <td>
-                                    <a href="<?php echo base_url() ?>admin/user/edit/$user['id']">
+                                    <a href="<?php echo base_url().'admin/user/edit/'.$user['id']?>">
                                         <i class="fa fa-pencil-square-o"></i>
                                     </a>
-                                    <a href="<?php echo base_url() ?>admin/user/delete/$user['id']">
-                                        <i class="fa fa-trash"></i>
+                                    <a href="<?php echo base_url().'admin/user/delete/'.$user['id']?>">
+                                    <i class="fa fa-trash"></i>
                                     </a>
                                 </td>
                             </tr>

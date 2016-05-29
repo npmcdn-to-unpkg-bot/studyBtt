@@ -22,7 +22,7 @@ class Muser extends CI_Model
     {
         $this->db->select('user.*, lvl.level_name, lvl.description, concat(user.firstname, user.lastname) as fullname');
         $this->db->from($this->_table);
-        $this->db->where(array('status' => self::STATUS_ACTIVE));
+        $this->db->where('status !=', self::STATUS_DELETE);
         $this->db->join('level as lvl', 'lvl.id = user.level_id');
         $this->db->limit($perPage, $start);
         $query = $this->db->get();
@@ -34,14 +34,25 @@ class Muser extends CI_Model
         return $this->db->count_all($this->_table);
     }
 
-    public static function getStatusUser()
+    public static function getStatusUser($status = null)
     {
         $listStatus = array(
             self::STATUS_ACTIVE => "Active",
             self::STATUS_INACTIVE => "Inactive",
             self::STATUS_DELETE => "Deleted",
         );
+        return $status != null ? $listStatus[$status] : $listStatus;
+    }
 
-        return $listStatus;
+    public function checkUsername($user)
+    {
+        $this->db->where("username", $user);
+        $query = $this->db->get($this->_table);
+        return $query->result_array();
+    }
+
+    public function insertUser($dataInsert)
+    {
+        return $this->db->insert($this->_table, $dataInsert);
     }
 }
