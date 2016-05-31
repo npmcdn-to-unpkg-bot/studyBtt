@@ -23,6 +23,7 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="<?php echo base_url() ?>/public/js/jquery-1.12.2.min.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -69,8 +70,6 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery 2.2.0 -->
-<script src="<?php echo base_url() ?>/public/js/jquery-1.12.2.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="<?php echo base_url() ?>/public/bootstrap/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->

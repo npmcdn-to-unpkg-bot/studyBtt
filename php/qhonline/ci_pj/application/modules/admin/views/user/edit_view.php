@@ -1,6 +1,8 @@
 <?php
 if (isset($data_form))
     extract($data_form);
+if (isset($level_id))
+    $level = $level_id;
 ?>
 <div class="col-md-12">
     <a href="<?php echo base_url() . 'admin/user'; ?>" class="btn btn-primary">
@@ -19,7 +21,7 @@ if (isset($data_form))
                     <label for="username" class="col-md-2 control-label">Username <span class="require">*</span></label>
 
                     <div class="col-md-9">
-                        <input value="<?php echo isset($username) ? $username : ""?>" type="text" class="form-control" name="username" id="username"
+                        <input readonly value="<?php echo isset($username) ? $username : ""?>" type="text" class="form-control" name="username" id="username"
                                placeholder="Username">
                         <span class="error"><?php echo form_error('username')?></span>
                     </div>
@@ -37,7 +39,7 @@ if (isset($data_form))
                     <label for="re_password" class="col-md-2 control-label">Re-Password <span class="require">*</span></label>
 
                     <div class="col-md-9">
-                        <input value="<?php echo isset($re_password) ? $re_password : ""?>" type="password" class="form-control" name="re_password" id="re_password"
+                        <input value="<?php echo isset($re_password) ? $re_password : $password?>" type="password" class="form-control" name="re_password" id="re_password"
                                placeholder="Re-Password">
                         <span class="error"><?php echo form_error('re_password')?></span>
                     </div>
@@ -46,7 +48,7 @@ if (isset($data_form))
                     <label for="email" class="col-md-2 control-label">Email</label>
 
                     <div class="col-md-9">
-                        <input value="<?php echo isset($email) ? $email : ""?>" type="text" class="form-control" name="email" id="email"
+                        <input readonly value="<?php echo isset($email) ? $email : ""?>" type="text" class="form-control" name="email" id="email"
                                placeholder="Email">
                         <span class="error"><?php echo form_error('email')?></span>
                     </div>
@@ -110,7 +112,7 @@ if (isset($data_form))
             <!-- /.box-body -->
             <div class="box-footer">
                 <div class="col-md-offset-2">
-                    <button type="submit" value="login" name="add" class="btn btn-danger">Add New</button>
+                    <button type="submit" value="update" name="update" class="btn btn-danger">Update</button>
                     <button type="reset" class="btn btn-default">Reset</button>
                 </div>
             </div>

@@ -114,6 +114,10 @@
 .form-group span.require {
     color: #dd4b39;
 }
+
+a.delete {
+    cursor: pointer;
+}
 /*end custom form*/
 @media (min-width: 767px) {
     .content-wrapper, .right-side {

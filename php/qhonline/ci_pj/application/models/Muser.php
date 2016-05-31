@@ -55,4 +55,32 @@ class Muser extends CI_Model
     {
         return $this->db->insert($this->_table, $dataInsert);
     }
+
+    public function getUserById($id)
+    {
+        $this->db->where("id", $id);
+        $query = $this->db->get($this->_table);
+        //get one row
+        return $query->row_array();
+    }
+
+    public function updateUser($data_update, $id)
+    {
+        $this->db->where("id", $id);
+        $this->db->update($this->_table, $data_update);
+    }
+
+    public function deleteUser($id)
+    {
+        $this->db->where("id", $id);
+        $this->db->delete($this->_table);
+    }
+
+    public function checkLogin($dataLogin)
+    {
+        $this->db->where("username", $dataLogin['username']);
+        $this->db->where("password", $dataLogin['password']);
+        $query = $this->db->get($this->_table);
+        return $query->num_rows();
+    }
 }

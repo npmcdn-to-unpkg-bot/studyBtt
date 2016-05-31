@@ -1,4 +1,16 @@
 <div class="col-md-12">
+    <?php if ($this->session->flashdata("flash_error")): ?>
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close"><span>&times;</span></button>
+            <strong>Error!</strong> <?php echo $this->session->flashdata("flash_error") ?>
+        </div>
+    <?php endif; ?>
+    <?php if ($this->session->flashdata("flash_success")): ?>
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close"><span>&times;</span></button>
+            <strong>Success!</strong> <?php echo $this->session->flashdata("flash_success") ?>
+        </div>
+    <?php endif; ?>
     <div class="row">
         <div class="col-xs-12">
             <a href="<?php echo base_url() . 'admin/user/add'; ?>" class="btn btn-primary">
@@ -32,11 +44,14 @@
                                 <td><?php echo Muser::getStatusUser($user['status']) ?></td>
                                 <td><?php echo $user['created_at'] ?></td>
                                 <td>
-                                    <a href="<?php echo base_url().'admin/user/edit/'.$user['id']?>">
+                                    <a href="<?php echo base_url() . 'admin/user/edit/' . $user['id'] ?>">
                                         <i class="fa fa-pencil-square-o"></i>
                                     </a>
-                                    <a href="<?php echo base_url().'admin/user/delete/'.$user['id']?>">
-                                    <i class="fa fa-trash"></i>
+                                    <a class="delete" id="delete<?php echo $user['id']?>"
+                                       data-username="<?php echo $user['fullname']?>"
+                                       data-toggle="modal" data-target="#myModal"
+                                       data-href="<?php echo base_url() . 'admin/user/delete/' . $user['id'] ?>">
+                                        <i class="fa fa-trash"></i>
                                     </a>
                                 </td>
                             </tr>
@@ -55,3 +70,28 @@
         </div>
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Confirm Delete?</h4></div>
+            <div class="modal-body"><p></p></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <a href="" class="btn btn-danger" id="confirm_delete">Confirm</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $("#myModal").on("show.bs.modal", function(e){
+            $("#myModal").find(".modal-body").html("Are you sure want to delete <b>"+$(e.relatedTarget).attr('data-username')+"</b>");
+            $("#confirm_delete").attr('href', $(e.relatedTarget).attr('data-href'));
+        });
+    });
+</script>
