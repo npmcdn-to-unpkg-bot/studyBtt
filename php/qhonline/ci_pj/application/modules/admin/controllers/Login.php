@@ -31,9 +31,18 @@ class Login extends MX_Controller
                     'username' => $this->input->post("username"),
                     'password' => md5($this->input->post("password"))
                 );
-                if ($this->Muser->checkLogin($dataLogin)) {
-                    echo "DONE"; die;
+                if ($user = $this->Muser->checkLogin($dataLogin)) {
+                    $dataSessionLogin = array(
+                        'username' => $dataLogin['username'],
+                        'role' => $user['level_name'],
+                        'user_id' => $user['id'],
+                        'fullname' => $user['fullname'],
+                        'is_login' => true
+                    );
+                    $this->session->set_userdata($dataSessionLogin);
+                    redirect('admin/user');
                 } else {
+                    $this->_data['data_form'] = $this->input->post();
                     $this->session->set_flashdata("flash_error", "Username or Password was incorrect");
                 }
             } else {
@@ -42,5 +51,11 @@ class Login extends MX_Controller
         }
 
         $this->load->view("login/index_view", $this->_data);
+    }
+
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect('admin/login');
     }
 }

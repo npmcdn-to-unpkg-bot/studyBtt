@@ -78,9 +78,13 @@ class Muser extends CI_Model
 
     public function checkLogin($dataLogin)
     {
+        $this->db->from($this->_table." as u");
+        $this->db->select('u.id, u.email, concat(u.firstname, u.lastname) as fullname, lvl.level_name');
         $this->db->where("username", $dataLogin['username']);
         $this->db->where("password", $dataLogin['password']);
-        $query = $this->db->get($this->_table);
-        return $query->num_rows();
+        $this->db->where('status !=', self::STATUS_DELETE);
+        $this->db->join('level as lvl', 'lvl.id = u.level_id');
+        $query = $this->db->get();
+        return $query->row_array();
     }
 }
