@@ -19,13 +19,23 @@ class HookExam
 
     public function setRoles()
     {
-        $this->_CI->Zend_Acl->addRoles(new Zend_Acl_Role("mod"));
-        $this->_CI->Zend_Acl->addRoles(new Zend_Acl_Role("admin"));
+        $this->_CI->Zend_Acl->addRole(new Zend_Acl_Role("mod"));
+        $this->_CI->Zend_Acl->addRole(new Zend_Acl_Role("admin"));
     }
 
     public function setResources()
     {
-        $this->_CI->Zend_Acl->add(new Zend_Acl_Resource('xxxx'));
+        $this->_CI->Zend_Acl->add(new Zend_Acl_Resource('admin/user'));
+        $this->_CI->Zend_Acl->add(new Zend_Acl_Resource('admin/category'));
+        $this->_CI->Zend_Acl->add(new Zend_Acl_Resource('admin/login'));
+    }
+
+    public function setAccess()
+    {
+        $this->_CI->Zend_Acl->allow("mod", "admin/user", array("index"));
+        $this->_CI->Zend_Acl->allow("admin", array("admin/user", 'admin/category'));
+
+        $this->_CI->Zend_Acl->allow(array("mod", "admin"), "admin/login");
     }
 
     public function checkAuthen()
@@ -35,7 +45,21 @@ class HookExam
         $action = $this->_CI->router->fetch_method();
         if ($module != "admin" || $controller != "login" || $action != "index") {
             if ($this->_CI->session->userdata('is_login')) {
-
+                $role = strtolower($this->_CI->session->userdata('role'));
+                $this->setRoles();
+                $this->setResources();
+                $this->setAccess();
+                $resource = $module != "" ? $module . '/' . $controller : $controller;
+                if ($this->_CI->Zend_Acl->has($resource)) {
+                    if ($this->_CI->Zend_Acl->isAllowed($role, $resource, $action)) {
+//                        die("allowed");
+                    } else {
+                        $this->_CI->session->set_flashdata("flash_error", "You don't have permission to access this action");
+                        redirect('admin/login');
+                    }
+                } else {
+                    die("Let's set resources");
+                }
             } else {
                 $this->_CI->session->set_flashdata("flash_error", "You must login");
                 redirect('admin/login');

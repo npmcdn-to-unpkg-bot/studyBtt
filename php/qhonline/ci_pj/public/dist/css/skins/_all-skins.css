@@ -26,6 +26,7 @@
 
 .skin-blue .sidebar a {
     color: #b8c7ce;
+    text-transform: capitalize;
 }
 
 .skin-blue .main-header .logo {
@@ -119,6 +120,25 @@ a.delete {
     cursor: pointer;
 }
 /*end custom form*/
+
+/* custom alert */
+.alert{
+    margin: 0px 15px 20px;
+    border: none;
+    border-radius: 3px;
+}
+
+.alert-success {
+    background-color: #00c0ef !important;
+    border-left: 5px solid #0097bc;
+}
+
+.alert-error {
+    background-color: #dd4b39 !important;
+    border-color: #c23321;
+}
+/*end custom alert*/
+
 @media (min-width: 767px) {
     .content-wrapper, .right-side {
         margin-top: 50px;

@@ -24,6 +24,10 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="<?php echo base_url() ?>/public/js/jquery-1.12.2.min.js"></script>
+<!--    nên định nghĩa base url cho js-->
+    <script>
+        var baseUrl = "<?php echo base_url()?>";
+    </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -50,6 +54,22 @@
         <section class="content">
             <!-- Main row -->
             <div class="row">
+                <?php if ($this->session->flashdata("flash_error")): ?>
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>Error!</strong> <?php echo $this->session->flashdata("flash_error") ?>
+                    </div>
+                <?php endif; ?>
+                <?php if ($this->session->flashdata("flash_success")): ?>
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>Success!</strong> <?php echo $this->session->flashdata("flash_success") ?>
+                    </div>
+                <?php endif; ?>
                 <?php $this->load->view($loadPage); ?>
             </div>
             <!-- /.row -->

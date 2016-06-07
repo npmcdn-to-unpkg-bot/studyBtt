@@ -1,16 +1,4 @@
 <div class="col-md-12">
-    <?php if ($this->session->flashdata("flash_error")): ?>
-        <div class="alert alert-danger alert-dismissible" role="alert">
-            <button type="button" class="close"><span>&times;</span></button>
-            <strong>Error!</strong> <?php echo $this->session->flashdata("flash_error") ?>
-        </div>
-    <?php endif; ?>
-    <?php if ($this->session->flashdata("flash_success")): ?>
-        <div class="alert alert-success alert-dismissible" role="alert">
-            <button type="button" class="close"><span>&times;</span></button>
-            <strong>Success!</strong> <?php echo $this->session->flashdata("flash_success") ?>
-        </div>
-    <?php endif; ?>
     <div class="row">
         <div class="col-xs-12">
             <a href="<?php echo base_url() . 'admin/user/add'; ?>" class="btn btn-primary">
