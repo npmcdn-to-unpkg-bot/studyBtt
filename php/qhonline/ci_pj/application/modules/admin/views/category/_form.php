@@ -5,16 +5,6 @@ if (isset($data_form))
 ?>
 <form class="form-horizontal" method="post">
     <div class="box-body">
-        <div class="form-group">
-            <textarea name="editor1" id="editor1" rows="10" cols="80">
-                This is my textarea to be replaced with CKEditor.
-            </textarea>
-            <script>
-                // Replace the <textarea id="editor1"> with a CKEditor
-                // instance, using default configuration.
-                CKEDITOR.replace( 'editor1' );
-            </script>
-        </div>
         <div class="form-group <?php if(form_error('parent')) echo 'has-error';?>">
             <label for="parent" class="col-md-2 control-label">Category Root</label>
 
@@ -22,6 +12,8 @@ if (isset($data_form))
                 <select class="form-control" name="parent">
                     <option value="0">Root</option>
                     <?php
+                    if (!isset($parent) || !isset($id))
+                        $parent = $id = "";
                     $listCate = Mcategory::getMenuCate($parent, $id);
                     echo $listCate;
                     ?>

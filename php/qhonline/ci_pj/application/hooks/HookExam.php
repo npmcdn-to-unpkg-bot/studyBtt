@@ -28,12 +28,13 @@ class HookExam
         $this->_CI->Zend_Acl->add(new Zend_Acl_Resource('admin/user'));
         $this->_CI->Zend_Acl->add(new Zend_Acl_Resource('admin/category'));
         $this->_CI->Zend_Acl->add(new Zend_Acl_Resource('admin/login'));
+        $this->_CI->Zend_Acl->add(new Zend_Acl_Resource('admin/news'));
     }
 
     public function setAccess()
     {
         $this->_CI->Zend_Acl->allow("mod", "admin/user", array("index"));
-        $this->_CI->Zend_Acl->allow("admin", array("admin/user", 'admin/category'));
+        $this->_CI->Zend_Acl->allow("admin", array("admin/user", 'admin/category', 'admin/news'));
 
         $this->_CI->Zend_Acl->allow(array("mod", "admin"), "admin/login");
     }
