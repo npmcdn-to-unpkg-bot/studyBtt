@@ -1,0 +1,32 @@
+#thay đổi file mặc định của folder
+#DirectoryIndex demoHtaccess.php
+
+#ẩn đuôi file, vẫn có thể truy cập trực tiếp vào file
+#IndexIgnore *.php
+
+#chặn IP người dùng, không thể truy cập trục tiếp file
+#deny from 127.0.0
+
+#chặn không cho hiển thị file & truy cập
+#Option -Indexes
+
+#Lỗi 404
+#ErrorDocument 404 http://study.local/php/qhonline/mvc/demoHtaccess.php
+#ErrorDocument 404 http://google.com
+
+#bắt người dùng login
+#AuthUserFile E:\xampp\htdocs\studyBtt\php\qhonline\mvc\.htpasswd
+#AuthGroupFile /dev/null
+#AuthName "Check login user"
+#AuthType Basic
+#<Limit GET POST>
+#require user admin
+#</Limit>
+
+#url rewrite
+#đường dẫn ảo nằm trong ^..$, đường dẫn thức
+#[L] kết thúc 1 thẻ lệnh và tiếp tục 1 thẻ lệnh tiếp theo
+RewriteEngine on
+
+RewriteRule ^xxx.btt$ index1.php [L]
+RewriteRule ^test/([0-9]+).html$ demoHtaccess.php?id=$1 [L]

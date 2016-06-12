@@ -1,0 +1,29 @@
+.vertical-center {
+    display: flex;
+    align-items: center;
+    min-height: 70vh;
+    margin: 0;
+}
+
+.no-padding-right {
+    padding-right: 0px;
+}
+
+.no-padding-left-right {
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.clear-both {
+    clear: both;
+}
+
+body {
+    background: url("../images/login.jpg");
+    background-repeat: repeat;
+    background-size: contain;
+}
+
+span.error {
+    color: #a94442;
+}
