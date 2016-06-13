@@ -1,21 +1,12 @@
 import {Component} from '@angular/core';
+import {OnInit} from '@angular/core';
 import {Hero} from './heroObject';
 import {heroDetailComponent} from './hero.detail.component';
-
-var HEROES:Hero[] = [
-    {"id": 11, "name": "Mr. Nice"},
-    {"id": 12, "name": "Narco"},
-    {"id": 13, "name": "Bombasto"},
-    {"id": 14, "name": "Celeritas"},
-    {"id": 15, "name": "Magneta"},
-    {"id": 16, "name": "RubberMan"},
-    {"id": 17, "name": "Dynama"},
-    {"id": 18, "name": "Dr IQ"},
-    {"id": 19, "name": "Magma"},
-    {"id": 20, "name": "Tornado"}
-];
+import {HeroService} from './hero.service';
 
 @Component({
+    //để dùng được hàm injector thì phải khai báo providers trong @Component
+    providers: [HeroService],
     selector: 'hero',
     template: `
         <ul class="heroes">
@@ -29,7 +20,7 @@ var HEROES:Hero[] = [
         
         <hero-detail [hero]="selectedHero"></hero-detail>
         `,
-    styles:[`
+    styles: [`
     .selectedHero {
       background-color: #CFD8DC !important;
       color: white;
@@ -81,8 +72,25 @@ var HEROES:Hero[] = [
     // phải khai báo directives để dùng, nếu không sẽ không hiện thẻ hero-detail
     directives: [heroDetailComponent]
 })
-export class heroComponent {
-    public heroes = HEROES;
+export class heroComponent implements OnInit{
+    //nên gọi hàm getHeroes ở hàm ngOnInit này, không nên gọi ở hàm constructor, hàm đấy chỉ để khởi tạo biến
+    // tránh những logic phức tạp ở đó
+    ngOnInit() {
+        this.getHeroes();
+    }
+
+    public heroes:Hero[];
+    // khởi tạo luôn ở trong hàm constructor này, để không phải new nhiều lần heroService
+    constructor(private heroService:HeroService) {
+    };
+
+    getHeroes() {
+        // khi đã dùng promise ở component service thì không thể truyền trực tiếp như thế này
+        // this.heroes = this.heroService.getHeroes();
+
+        this.heroService.getHeroesSlowlyBtt().then(value => {this.heroes = value});
+    }
+
     selectedHero:Hero;
 
     selectHero(hero:Hero) {
