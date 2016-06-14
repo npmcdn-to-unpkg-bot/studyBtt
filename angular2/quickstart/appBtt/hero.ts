@@ -6,7 +6,7 @@ import {HeroService} from './hero.service';
 
 @Component({
     //để dùng được hàm injector thì phải khai báo providers trong @Component
-    providers: [HeroService],
+    // providers: [HeroService],
     selector: 'hero',
     template: `
         <ul class="heroes">
@@ -16,7 +16,7 @@ import {HeroService} from './hero.service';
                 <span class="badge">{{hero.id}} : </span>{{hero.name}}
             </li>
         </ul>
-        <button (click)="UnselectHero()">UnselectedHero</button>
+        <button (click)="UnselectHero()">Unselected</button>
         
         <hero-detail [hero]="selectedHero"></hero-detail>
         `,
