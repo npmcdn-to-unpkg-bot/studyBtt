@@ -26,4 +26,8 @@ export class HeroService {
             ) // 2 seconds
         );
     }
+
+    getHero(id:number) {
+        return this.getHeroes().then(heroes => heroes.filter(hero => hero.id === id)[0]);
+    }
 }

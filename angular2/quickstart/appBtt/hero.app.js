@@ -14,6 +14,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var hero_service_1 = require('./hero.service');
 var hero_1 = require('./hero');
+var hero_detail_component_1 = require('./hero.detail.component');
+var dashboard_component_1 = require('./dashboard.component');
 var router_deprecated_1 = require('@angular/router-deprecated');
 var heroApp = (function () {
     function heroApp() {
@@ -23,7 +25,8 @@ var heroApp = (function () {
         core_1.Component({
             selector: 'my-app',
             //để dùng được routerLink, phải add thêm <base href="/"> ở file html
-            template: "\n        <h1>{{title}}</h1>\n        <a [routerLink]=\"['Heroes']\">Heroes</a>\n        <router-outlet></router-outlet>\n    ",
+            // route-outlet để hiển thị component mà đã match với router
+            template: "\n        <h1>{{title}}</h1>\n        <nav>\n            <a [routerLink]=\"['Dashboard']\">Dashboard</a>\n            <a [routerLink]=\"['Heroes']\">Heroes</a>\n        </nav>\n        <router-outlet></router-outlet>\n    ",
             directives: [router_deprecated_1.ROUTER_DIRECTIVES],
             providers: [
                 router_deprecated_1.ROUTER_PROVIDERS,
@@ -35,6 +38,16 @@ var heroApp = (function () {
                 path: '/heroes',
                 name: 'Heroes',
                 component: hero_1.heroComponent //component mà router sẽ tạo khi navigating
+            },
+            {
+                path: '/dashboard',
+                name: 'Dashboard',
+                component: dashboard_component_1.dashboardComponent,
+            },
+            {
+                path: '/detail/:id',
+                name: 'HeroDetail',
+                component: hero_detail_component_1.heroDetailComponent
             }
         ]), 
         __metadata('design:paramtypes', [])
