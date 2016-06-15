@@ -9,27 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 /**
- * Created by Truong on 14-Jun-16.
+ * Created by Truong on 15-Jun-16.
  */
 var core_1 = require('@angular/core');
-var hero_service_1 = require('./hero.service');
-var hero_1 = require('./hero');
-var hero_detail_component_1 = require('./hero.detail.component');
-var dashboard_component_1 = require('./dashboard.component');
 var router_deprecated_1 = require('@angular/router-deprecated');
-var heroApp = (function () {
-    function heroApp() {
-        this.title = "Tour of Heroes";
+var hero_component_1 = require("./hero.component");
+var hero_service_1 = require("./hero.service");
+var dashboard_component_1 = require("./dashboard.component");
+var hero_detail_component_1 = require("./hero-detail.component");
+var AppComponent = (function () {
+    function AppComponent() {
+        this.title = "My app Angular2";
     }
-    heroApp = __decorate([
+    AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
             //để dùng được routerLink, phải add thêm <base href="/"> ở file html
             // route-outlet để hiển thị component mà đã match với router
-            template: "\n        <h1>{{title}}</h1>\n        <nav>\n            <a [routerLink]=\"['Dashboard']\">Dashboard</a>\n            <a [routerLink]=\"['Heroes']\">Heroes</a>\n        </nav>\n        <router-outlet></router-outlet>\n    ",
+            template: "\n        <h1>{{title}}</h1>\n        <nav>\n            <a [routerLink]=\"['Dashboard']\">Dasboard</a>\n            <a [routerLink]=\"['Heroes']\">Heroes</a>\n        </nav>\n        <router-outlet></router-outlet>\n    ",
+            styleUrls: ['app/app.component.css'],
             directives: [router_deprecated_1.ROUTER_DIRECTIVES],
             providers: [
                 router_deprecated_1.ROUTER_PROVIDERS,
+                //nhờ đã cắm service vào đây r, nên những component con không cần phải cắm vào provider nữa
                 hero_service_1.HeroService
             ]
         }),
@@ -37,22 +39,22 @@ var heroApp = (function () {
             {
                 path: '/heroes',
                 name: 'Heroes',
-                component: hero_1.heroComponent //component mà router sẽ tạo khi navigating
+                component: hero_component_1.HeroComponent
             },
             {
                 path: '/dashboard',
                 name: 'Dashboard',
-                component: dashboard_component_1.dashboardComponent,
+                component: dashboard_component_1.DashboardComponent
             },
             {
                 path: '/detail/:id',
                 name: 'HeroDetail',
-                component: hero_detail_component_1.heroDetailComponent
+                component: hero_detail_component_1.HeroDetailComponent
             }
         ]), 
         __metadata('design:paramtypes', [])
-    ], heroApp);
-    return heroApp;
+    ], AppComponent);
+    return AppComponent;
 }());
-exports.heroApp = heroApp;
-//# sourceMappingURL=hero.app.js.map
+exports.AppComponent = AppComponent;
+//# sourceMappingURL=app.component.js.map

@@ -73,13 +73,15 @@ import {HeroService} from './hero.service';
     directives: [heroDetailComponent]
 })
 export class heroComponent implements OnInit{
+    selectedHero:Hero;
+    public heroes:Hero[];
+
     //nên gọi hàm getHeroes ở hàm ngOnInit này, không nên gọi ở hàm constructor, hàm đấy chỉ để khởi tạo biến
     // tránh những logic phức tạp ở đó
     ngOnInit() {
         this.getHeroes();
     }
 
-    public heroes:Hero[];
     // khởi tạo luôn ở trong hàm constructor này, để không phải new nhiều lần heroService
     constructor(private heroService:HeroService) {
     };
@@ -90,8 +92,6 @@ export class heroComponent implements OnInit{
 
         this.heroService.getHeroesSlowlyBtt().then(value => {this.heroes = value});
     }
-
-    selectedHero:Hero;
 
     selectHero(hero:Hero) {
         this.selectedHero = hero
