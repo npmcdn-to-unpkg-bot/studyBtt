@@ -20,6 +20,7 @@ import {Router} from "@angular/router-deprecated";
 export class HeroComponent implements OnInit{
     public heroes: HeroObject[];
     public selectedHero;
+    addingHero = false;
 
     ngOnInit() {
         this.getHeroes();
@@ -41,5 +42,32 @@ export class HeroComponent implements OnInit{
 
     gotoDetail() {
         this.router.navigate(['HeroDetail', { id: this.selectedHero.id }]);
+    }
+
+    addHero() {
+        this.addingHero = true;
+        this.selectedHero = null;
+    }
+
+    close(savedHero: HeroObject) {
+        this.addingHero = false;
+        if (savedHero) {
+            this.getHeroes();
+        }
+    }
+
+    delete(hero: HeroObject, event: any) {
+        event.stopPropagation();
+        this.heroService
+            .deleteHero(hero)
+            .then(
+                res => {
+                    this.heroes = this.heroes.filter(h => h !== hero);
+                    if (this.selectedHero === hero) {
+                        this.selectedHero = null;
+                    }
+                }
+            )
+            .catch(error => this.error = error)
     }
 }

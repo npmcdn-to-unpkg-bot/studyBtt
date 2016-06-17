@@ -19,19 +19,48 @@ var HeroDetailComponent = (function () {
     function HeroDetailComponent(heroService, routeParams) {
         this.heroService = heroService;
         this.routeParams = routeParams;
+        this.close = new core_1.EventEmitter();
+        this.navigated = false; //true if navigated here
     }
     HeroDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
-        var id = +this.routeParams.get('id');
-        this.heroService.getHero(id).then(function (value) { return _this.hero = value; });
+        if (this.routeParams.get('id') !== null) {
+            // dấu + để conver sang dạng int
+            var id = +this.routeParams.get('id');
+            this.navigated = true;
+            this.heroService.getHero(id).then(function (value) { return _this.hero = value; });
+        }
+        else {
+            this.hero = new hero_object_1.HeroObject();
+            this.navigated = false;
+        }
     };
-    HeroDetailComponent.prototype.goBack = function () {
-        window.history.back();
+    HeroDetailComponent.prototype.save = function () {
+        var _this = this;
+        this.heroService
+            .save(this.hero)
+            .then(function (value) {
+            _this.hero = value; // saved hero, w/ id if new
+            _this.goBack(value);
+        })
+            .catch(function (error) {
+            _this.error = error;
+        });
+    };
+    HeroDetailComponent.prototype.goBack = function (savedHero) {
+        if (savedHero === void 0) { savedHero = null; }
+        this.close.emit(savedHero);
+        if (this.navigated)
+            window.history.back();
     };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', hero_object_1.HeroObject)
     ], HeroDetailComponent.prototype, "hero", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], HeroDetailComponent.prototype, "close", void 0);
     HeroDetailComponent = __decorate([
         core_1.Component({
             selector: 'hero-detail',
