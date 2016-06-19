@@ -31,6 +31,8 @@ var HeroDetailComponent = (function () {
             this.heroService.getHero(id).then(function (value) { return _this.hero = value; });
         }
         else {
+            //Dành cho case add hero
+            console.log("don't exist hero id");
             this.hero = new hero_object_1.HeroObject();
             this.navigated = false;
         }

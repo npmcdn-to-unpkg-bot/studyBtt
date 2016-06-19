@@ -22,7 +22,8 @@ var hero_data_1 = require('./hero.data');
 var HeroService = (function () {
     function HeroService(http) {
         this.http = http;
-        this.heroesUrl = 'app/heroes'; // URL to web api
+        // gọi đến memory data
+        this.heroesUrl = 'app/allheroes'; // URL to web api
     }
     // Hàm này là hàm cũ, trước khi dùng data in memory
     // getHeroes() {

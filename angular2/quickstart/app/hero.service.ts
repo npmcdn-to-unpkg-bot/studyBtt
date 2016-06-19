@@ -13,7 +13,8 @@ import {HeroObject} from './hero.object';
 // comment cái này lại thì bị lỗi skipitmyself
 @Injectable()
 export class HeroService {
-    private heroesUrl = 'app/heroes';  // URL to web api
+    // gọi đến memory data
+    private heroesUrl = 'app/allheroes';  // URL to web api
     constructor(private http: Http) { }
     // Hàm này là hàm cũ, trước khi dùng data in memory
     // getHeroes() {

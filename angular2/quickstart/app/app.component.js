@@ -50,7 +50,12 @@ var AppComponent = (function () {
                 path: '/detail/:id',
                 name: 'HeroDetail',
                 component: hero_detail_component_1.HeroDetailComponent
-            }
+            },
+            {
+                path: '/detail',
+                name: 'HeroDetailAdd',
+                component: hero_detail_component_1.HeroDetailComponent
+            },
         ]), 
         __metadata('design:paramtypes', [])
     ], AppComponent);

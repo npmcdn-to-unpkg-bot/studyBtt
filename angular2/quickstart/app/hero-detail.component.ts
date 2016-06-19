@@ -30,6 +30,8 @@ export class HeroDetailComponent implements OnInit{
             this.navigated = true;
             this.heroService.getHero(id).then(value => this.hero = value);
         } else {
+            //Dành cho case add hero
+            console.log("don't exist hero id");
             this.hero = new HeroObject();
             this.navigated = false;
         }

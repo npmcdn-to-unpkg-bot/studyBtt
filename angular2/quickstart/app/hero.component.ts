@@ -17,23 +17,27 @@ import {Router} from "@angular/router-deprecated";
     styleUrls: ['app/hero.component.css']
 })
 
-export class HeroComponent implements OnInit{
-    public heroes: HeroObject[];
+export class HeroComponent implements OnInit {
+    public heroes:HeroObject[];
     public selectedHero;
     addingHero = false;
+    error:any;
 
     ngOnInit() {
         this.getHeroes();
     }
+
     // khởi tạo luôn ở trong hàm constructor này, để không phải new nhiều lần heroService
-    constructor(private heroService: HeroService, private router:Router) {
+    constructor(private heroService:HeroService, private router:Router) {
 
     }
 
     getHeroes() {
         // khi đã dùng promise ở component service thì không thể truyền trực tiếp như thế này
         // this.heroes = this.heroService.getHeroes();
-        this.heroService.getHeroes().then(value => {this.heroes = value});
+        this.heroService.getHeroes().then(value => {
+            this.heroes = value
+        });
     }
 
     selectHero(hero) {
@@ -41,7 +45,7 @@ export class HeroComponent implements OnInit{
     }
 
     gotoDetail() {
-        this.router.navigate(['HeroDetail', { id: this.selectedHero.id }]);
+        this.router.navigate(['HeroDetail', {id: this.selectedHero.id}]);
     }
 
     addHero() {
@@ -49,14 +53,14 @@ export class HeroComponent implements OnInit{
         this.selectedHero = null;
     }
 
-    close(savedHero: HeroObject) {
+    close(savedHero:HeroObject) {
         this.addingHero = false;
         if (savedHero) {
             this.getHeroes();
         }
     }
 
-    delete(hero: HeroObject, event: any) {
+    delete(hero:HeroObject, event:any) {
         event.stopPropagation();
         this.heroService
             .deleteHero(hero)

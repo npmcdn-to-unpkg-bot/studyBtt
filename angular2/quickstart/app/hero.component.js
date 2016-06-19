@@ -29,7 +29,9 @@ var HeroComponent = (function () {
         var _this = this;
         // khi đã dùng promise ở component service thì không thể truyền trực tiếp như thế này
         // this.heroes = this.heroService.getHeroes();
-        this.heroService.getHeroes().then(function (value) { _this.heroes = value; });
+        this.heroService.getHeroes().then(function (value) {
+            _this.heroes = value;
+        });
     };
     HeroComponent.prototype.selectHero = function (hero) {
         this.selectedHero = hero;

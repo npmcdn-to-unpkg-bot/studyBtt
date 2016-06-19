@@ -44,7 +44,12 @@ import {HeroDetailComponent} from "./hero-detail.component";
         path: '/detail/:id',
         name: 'HeroDetail',
         component: HeroDetailComponent
-    }
+    },
+    {
+        path: '/detail',
+        name: 'HeroDetailAdd',
+        component: HeroDetailComponent
+    },
 ])
 
 export class AppComponent {
