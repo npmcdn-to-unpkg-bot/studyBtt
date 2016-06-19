@@ -62,6 +62,9 @@ var HeroComponent = (function () {
         })
             .catch(function (error) { return _this.error = error; });
     };
+    HeroComponent.prototype.testclick = function (event) {
+        console.log("Event : ", event);
+    };
     HeroComponent = __decorate([
         core_1.Component({
             //để dùng được hàm injector thì phải khai báo providers trong @Component

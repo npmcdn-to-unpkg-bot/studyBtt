@@ -31,6 +31,8 @@ var HeroDetailComponent = (function () {
             this.heroService.getHero(id).then(function (value) { return _this.hero = value; });
         }
         else {
+            //Nếu bên hero gọi đến detail, mà truyền biến hero thì sẽ nhận được ở đây
+            //console.log("hero ", this.hero);
             //Dành cho case add hero
             console.log("don't exist hero id");
             this.hero = new hero_object_1.HeroObject();

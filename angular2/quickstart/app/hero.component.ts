@@ -74,4 +74,8 @@ export class HeroComponent implements OnInit {
             )
             .catch(error => this.error = error)
     }
+
+    testclick(event: any) {
+        console.log("Event : ", event);
+    }
 }
