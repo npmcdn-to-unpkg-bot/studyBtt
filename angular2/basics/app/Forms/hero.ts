@@ -6,7 +6,8 @@ export class HeroObject {
         public id: number,
         public name: string,
         public power: string,
-        public  alterGo: string
+        // dấu ? là optional
+        public alterGo?: string
     ) {
         
     }

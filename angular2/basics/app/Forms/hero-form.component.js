@@ -15,10 +15,11 @@ var core_1 = require('@angular/core');
 var hero_1 = require('./hero');
 var HeroFormComponent = (function () {
     function HeroFormComponent() {
+        this.active = true;
+        this.submitted = false;
         this.powers = ['Really Smart', 'Super Flexible',
             'Super Hot', 'Weather Changer'];
-        this.model = new hero_1.HeroObject(18, 'Dr IQ', this.powers[0], 'Chuck Overstreet');
-        this.submitted = false;
+        this.model = new hero_1.HeroObject(18, 'Dr IQ', this.powers[1], 'Chuck Overstreet');
     }
     HeroFormComponent.prototype.onSubmit = function () {
         this.submitted = true;
@@ -31,6 +32,15 @@ var HeroFormComponent = (function () {
         enumerable: true,
         configurable: true
     });
+    //phải thêm biến active vì khi ấn nút rs form, sau đó nhập vào box name
+    // => input đó không còn là pristine => khi ấn new hero phát nữa thì sẽ bị hiện message error
+    //Linh lt : không hiểu chỗ này, sao form lại được tạo lại ????
+    HeroFormComponent.prototype.newHero = function () {
+        var _this = this;
+        this.model = new hero_1.HeroObject(42, '', '');
+        this.active = false;
+        setTimeout(function () { return _this.active = true; }, 2000);
+    };
     HeroFormComponent = __decorate([
         core_1.Component({
             selector: 'hero-form',
