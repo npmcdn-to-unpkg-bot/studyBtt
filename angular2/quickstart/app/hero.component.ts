@@ -28,6 +28,7 @@ export class HeroComponent implements OnInit {
     }
 
     // khởi tạo luôn ở trong hàm constructor này, để không phải new nhiều lần heroService
+    // Nhờ ở app.component đã nạp heroservice vào provider r, nên ở đây mới dùng được
     constructor(private heroService:HeroService, private router:Router) {
 
     }
