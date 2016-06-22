@@ -1,0 +1,19 @@
+cái này nghĩa là gì
+<!-- `myClick` is an event on the custom `MyClickDirective` -->
+<div (myClick)="clickMessage=$event">click with myClick</div>
+
+the $event is a DOM event object, with properties such as target and target.value.
+If the event belongs to a directive (remember: components are directives), $event has whatever shape the directive chose to produce.
+<input [value]="currentHero.firstName"
+       (input)="currentHero.firstName=$event.target.value" >
+[(x)]="e" <==> [x]="e" (xChange)="e=$event"
+
+Cách hoạt động của : Custom events with EventEmitter
+
+Không nên/cần built 1 directives ?? đúng k
+
+
+Input properties usually receive data values. Output properties expose event producers, such as EventEmitter objects.
+<hero-detail [hero]="currentHero" (deleteRequest)="deleteHero($event))">
+HeroDetailComponent.hero is an input property from the perspective of HeroDetailComponent because data flows into that property from a template binding expression.
+HeroDetailComponent.deleteRequest is an output property from the perspective of HeroDetailComponent because events stream out of that property and toward the handler in a template binding statement.

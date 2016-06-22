@@ -55,6 +55,7 @@ export class HeroComponent implements OnInit {
     }
 
     close(savedHero:HeroObject) {
+        console.log("close Hero component");
         this.addingHero = false;
         if (savedHero) {
             this.getHeroes();

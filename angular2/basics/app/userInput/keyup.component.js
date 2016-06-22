@@ -83,4 +83,23 @@ var KeyUpComponent_v4 = (function () {
     return KeyUpComponent_v4;
 }());
 exports.KeyUpComponent_v4 = KeyUpComponent_v4;
+var EventComponent = (function () {
+    function EventComponent() {
+        this.firstname = "truongbt";
+        this.isClass = true;
+        this.isActive = true;
+    }
+    EventComponent.prototype.input = function (text) {
+        console.log("event input");
+    };
+    EventComponent = __decorate([
+        core_1.Component({
+            selector: 'eventStudy',
+            template: "\n        <input [value]=\"firstname\" (input)=\"firstname=$event.target.value\">\n        <div [class.btt]=\"isClass\" [style.width.px]=\"222\">Class</div>\n        <div [ngClass]=\"{active: isActive, disabled: isDisabled}\">Ng Class</div>\n        {{firstname}}\n    "
+        }), 
+        __metadata('design:paramtypes', [])
+    ], EventComponent);
+    return EventComponent;
+}());
+exports.EventComponent = EventComponent;
 //# sourceMappingURL=keyup.component.js.map

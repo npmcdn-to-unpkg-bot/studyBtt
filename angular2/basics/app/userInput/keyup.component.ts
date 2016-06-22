@@ -59,3 +59,23 @@ export class KeyUpComponent_v3 {
 export class KeyUpComponent_v4 {
     values = '';
 }
+
+@Component({
+    selector: 'eventStudy',
+    template: `
+        <input [value]="firstname" (input)="firstname=$event.target.value">
+        <div [class.btt]="isClass" [style.width.px]="222">Class</div>
+        <div [ngClass]="{active: isActive, disabled: isDisabled}">Ng Class</div>
+        {{firstname}}
+    `
+})
+
+export class EventComponent {
+    public firstname = "truongbt";
+    public isClass = true;
+    public isActive = true;
+
+    input(text:any) {
+        console.log("event input");
+    }
+}

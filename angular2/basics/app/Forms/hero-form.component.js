@@ -34,6 +34,9 @@ var HeroFormComponent = (function () {
     });
     //phải thêm biến active vì khi ấn nút rs form, sau đó nhập vào box name
     // => input đó không còn là pristine => khi ấn new hero phát nữa thì sẽ bị hiện message error
+    // When NgIf is false, Angular physically removes the element subtree from the DOM.
+    // It destroys components in the subtree, along with their state, potentially freeing up substantial resources
+    // and resulting in better performance for the user.
     //Linh lt : không hiểu chỗ này, sao form lại được tạo lại ????
     HeroFormComponent.prototype.newHero = function () {
         var _this = this;

@@ -45,6 +45,7 @@ var HeroComponent = (function () {
         this.selectedHero = null;
     };
     HeroComponent.prototype.close = function (savedHero) {
+        console.log("close Hero component");
         this.addingHero = false;
         if (savedHero) {
             this.getHeroes();

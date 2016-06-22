@@ -20,7 +20,7 @@ var UserInputComponent = (function () {
         core_1.Component({
             selector: 'user-input',
             templateUrl: '/app/userInput/userInput.component.html',
-            directives: [keyup_component_1.KeyUpComponent_v1, keyup_component_1.KeyUpComponent_v2, keyup_component_1.KeyUpComponent_v3, keyup_component_1.KeyUpComponent_v4]
+            directives: [keyup_component_1.KeyUpComponent_v1, keyup_component_1.KeyUpComponent_v2, keyup_component_1.KeyUpComponent_v3, keyup_component_1.KeyUpComponent_v4, keyup_component_1.EventComponent]
         }), 
         __metadata('design:paramtypes', [])
     ], UserInputComponent);
