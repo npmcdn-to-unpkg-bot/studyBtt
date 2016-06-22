@@ -24,6 +24,7 @@ var HeroDetailComponent = (function () {
     }
     HeroDetailComponent.prototype.ngOnInit = function () {
         var _this = this;
+        console.log('ng init detail');
         if (this.routeParams.get('id') !== null) {
             // dấu + để conver sang dạng int
             var id = +this.routeParams.get('id');
@@ -35,7 +36,7 @@ var HeroDetailComponent = (function () {
             //console.log("hero ", this.hero);
             //Dành cho case add hero
             console.log("don't exist hero id");
-            this.hero = new hero_object_1.HeroObject();
+            // this.hero = new HeroObject();
             this.navigated = false;
         }
     };

@@ -14,6 +14,7 @@ import {RouteParams} from "@angular/router-deprecated";
 
 export class HeroDetailComponent implements OnInit{
     // phải khai báo input thì mới nhận được biến hero từ file khác gọi sang
+    // Linhlt : cần hỏi logic ở hàm hình list heroes
     @Input() hero: HeroObject;
     @Output() close = new EventEmitter();
     error: any;
@@ -24,6 +25,7 @@ export class HeroDetailComponent implements OnInit{
     }
 
     ngOnInit() {
+        console.log('ng init detail');
         if (this.routeParams.get('id') !== null) {
             // dấu + để conver sang dạng int
             let id = +this.routeParams.get('id');
@@ -34,7 +36,7 @@ export class HeroDetailComponent implements OnInit{
             //console.log("hero ", this.hero);
             //Dành cho case add hero
             console.log("don't exist hero id");
-            this.hero = new HeroObject();
+            // this.hero = new HeroObject();
             this.navigated = false;
         }
     }

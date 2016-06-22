@@ -17,6 +17,7 @@ var hero_detail_component_1 = require('./hero-detail.component');
 var router_deprecated_1 = require("@angular/router-deprecated");
 var HeroComponent = (function () {
     // khởi tạo luôn ở trong hàm constructor này, để không phải new nhiều lần heroService
+    // Nhờ ở app.component đã nạp heroservice vào provider r, nên ở đây mới dùng được
     function HeroComponent(heroService, router) {
         this.heroService = heroService;
         this.router = router;
@@ -44,6 +45,7 @@ var HeroComponent = (function () {
         this.selectedHero = null;
     };
     HeroComponent.prototype.close = function (savedHero) {
+        console.log("close Hero component");
         this.addingHero = false;
         if (savedHero) {
             this.getHeroes();
