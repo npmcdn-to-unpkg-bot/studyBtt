@@ -15,6 +15,9 @@ var core_1 = require('@angular/core');
 var router_deprecated_1 = require('@angular/router-deprecated');
 var userInput_component_1 = require('./userInput/userInput.component');
 var hero_form_component_1 = require('./Forms/hero-form.component');
+var attribute_directive_component_1 = require('./AttributeDirectives/attribute-directive.component');
+var pipe_component_1 = require('./pipe/pipe.component');
+var io_component_1 = require('./IO/io.component');
 var AppComponent = (function () {
     function AppComponent() {
         this.title = "Basic Angular 2";
@@ -22,8 +25,8 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-basics',
-            template: "\n        <h1>{{title}}</h1>\n        <nav>\n            <a [routerLink]=\"['UserInput']\">User Input</a>\n            <a [routerLink]=\"['Form']\">Form</a>\n        </nav>\n        <router-outlet></router-outlet>\n    ",
-            directives: [userInput_component_1.UserInputComponent, router_deprecated_1.ROUTER_DIRECTIVES, hero_form_component_1.HeroFormComponent],
+            template: "\n        <h1>{{title}}</h1>\n        <nav>\n            <a [routerLink]=\"['UserInput']\">User Input</a>\n            <a [routerLink]=\"['Form']\">Form</a>\n            <a [routerLink]=\"['AD']\">Attribute Directive</a>\n            <a [routerLink]=\"['Pipe']\">Pipe</a>\n            <a [routerLink]=\"['Io']\">IO Demo</a>\n        </nav>\n        <router-outlet></router-outlet>\n    ",
+            directives: [router_deprecated_1.ROUTER_DIRECTIVES],
             providers: [router_deprecated_1.ROUTER_PROVIDERS]
         }),
         router_deprecated_1.RouteConfig([
@@ -36,6 +39,21 @@ var AppComponent = (function () {
                 path: '/form',
                 name: 'Form',
                 component: hero_form_component_1.HeroFormComponent
+            },
+            {
+                path: '/attribute-directive',
+                name: 'AD',
+                component: attribute_directive_component_1.AttributeDirectiveComponent
+            },
+            {
+                path: '/pipe',
+                name: 'Pipe',
+                component: pipe_component_1.PipeComponent
+            },
+            {
+                path: '/io',
+                name: 'Io',
+                component: io_component_1.IoComponent
             },
         ]), 
         __metadata('design:paramtypes', [])

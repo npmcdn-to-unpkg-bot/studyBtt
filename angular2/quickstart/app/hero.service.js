@@ -23,7 +23,7 @@ var HeroService = (function () {
     function HeroService(http) {
         this.http = http;
         // gọi đến memory data
-        this.heroesUrl = 'app/allheroes'; // URL to web api
+        this.heroesUrl = 'app/allheroes1'; // URL to web api
     }
     // Hàm này là hàm cũ, trước khi dùng data in memory
     // getHeroes() {
@@ -33,9 +33,13 @@ var HeroService = (function () {
         //hàm http.get trả về một RxJS Observable (quản lí luồng bất đồng bộ dữ liệụ.
         // Dùng toPromise để convert nó về Promise. Nhưng thằng Observable lại không có hàm toPromise.
         // Chính vì thế nên ta sẽ dùng 1 'operator' mà đã extend từ thằng Observale bằng cách import rxjs...
+        // Promise: http://freetuts.net/tim-hieu-promise-trong-javascript-es6-620.html
         return this.http.get(this.heroesUrl)
             .toPromise()
-            .then(function (response) { return response.json().data; })
+            .then(function (response) { return response.json().data; }, function (error) {
+            console.log('reject me no r123', error);
+            // return Promise.reject(error.message || error);
+        })
             .catch(this.handleError);
     };
     HeroService.prototype.getHeroesSlowlyBtt = function () {

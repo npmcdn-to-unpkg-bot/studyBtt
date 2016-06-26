@@ -64,8 +64,9 @@ export class KeyUpComponent_v4 {
     selector: 'eventStudy',
     template: `
         <input [value]="firstname" (input)="firstname=$event.target.value">
+        <textarea [value]="firstname" (keyup)="firstname=$event.target.value"></textarea>
         <div [class.btt]="isClass" [style.width.px]="222">Class</div>
-        <div [ngClass]="{active: isActive, disabled: isDisabled}">Ng Class</div>
+        <div [ngClass]="{active123: isActive, disabledbtt: isDisabled}">Ng Class</div>
         {{firstname}}
     `
 })

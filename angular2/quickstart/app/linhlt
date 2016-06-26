@@ -15,5 +15,6 @@ Không nên/cần built 1 directives ?? đúng k
 
 Input properties usually receive data values. Output properties expose event producers, such as EventEmitter objects.
 <hero-detail [hero]="currentHero" (deleteRequest)="deleteHero($event))">
+deleteRequest : directive
 HeroDetailComponent.hero is an input property from the perspective of HeroDetailComponent because data flows into that property from a template binding expression.
 HeroDetailComponent.deleteRequest is an output property from the perspective of HeroDetailComponent because events stream out of that property and toward the handler in a template binding statement.
