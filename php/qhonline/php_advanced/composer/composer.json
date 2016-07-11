@@ -1,0 +1,12 @@
+{
+  "require": {
+    "monolog/monolog": "^1.20"
+  },
+//  sau khi setup autoload thì chạy lệnh composer dump-autoload
+//  tham khảo thêm ở link composer.json.jolicode.com
+  "autoload": {
+    "classmap": [
+      "App/Library"
+    ]
+  }
+}
