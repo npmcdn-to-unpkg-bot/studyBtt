@@ -1,5 +1,6 @@
 <?php
 use App\Task;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +13,11 @@ use App\Task;
 |
 */
 Route::get('/', function () {
+    $tasks = Task::orderBy('created_at', 'asc')->get();
+    
+    return view('tasks', [
+        'tasks' => $tasks
+    ]);
 });
 
 Route::get('/tasks', function () {
@@ -24,27 +30,31 @@ Route::get('/tasks', function () {
 
 Route::post('/task', function (Request $request) {
     $validator = Validator::make($request->all(), [
-        'name' => 'required[max:255',
+        'name' => 'required|max:255',
     ]);
-
+    
     if ($validator->fails()) {
         return redirect('/tasks')
             ->withInput()
             ->withErrors($validator);
     };
-
+    
     $task = new Task;
     $task->name = $request->name;
     $task->save();
-
+    
     return redirect('/');
 });
 
 /**
  * Delete a task
+ *
+ * phải để là {task} thì mới tự get được data
  */
-Route::delete('/task/{task_id}', function (Task $task) {
-
+Route::delete('/task/{task}', function (Task $task) {
+    $task->delete();
+    
+    return redirect('/');
 });
 
 Route::controller('demo', 'Admin\DemoController');
