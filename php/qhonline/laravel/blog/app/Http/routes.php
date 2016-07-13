@@ -1,4 +1,5 @@
 <?php
+use App\Task;
 
 /*
 |--------------------------------------------------------------------------
@@ -11,5 +12,39 @@
 |
 */
 Route::get('/', function () {
-    return view('welcome');
 });
+
+Route::get('/tasks', function () {
+    return view('tasks');
+});
+
+/*
+ * Add new task
+ */
+
+Route::post('/task', function (Request $request) {
+    $validator = Validator::make($request->all(), [
+        'name' => 'required[max:255',
+    ]);
+
+    if ($validator->fails()) {
+        return redirect('/tasks')
+            ->withInput()
+            ->withErrors($validator);
+    };
+
+    $task = new Task;
+    $task->name = $request->name;
+    $task->save();
+
+    return redirect('/');
+});
+
+/**
+ * Delete a task
+ */
+Route::delete('/task/{task_id}', function (Task $task) {
+
+});
+
+Route::controller('demo', 'Admin\DemoController');
