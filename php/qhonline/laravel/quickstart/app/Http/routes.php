@@ -20,7 +20,7 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/tasks', function () {
+Route::get('/task', function () {
     return view('tasks');
 });
 
@@ -57,4 +57,4 @@ Route::delete('/task/{task}', function (Task $task) {
     return redirect('/');
 });
 
-Route::controller('demo', 'Admin\DemoController');
+//Route::controller('demo', 'Admin\DemoController');
