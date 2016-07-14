@@ -20,6 +20,12 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/tasks', 'TaskController@index');
+Route::post('/task', 'TaskController@store');
+Route::delete('/task/{task}', 'TaskController@destroy');
+
+Route::resource('testcrud', 'TaskController');
+
 Route::get('/task', function () {
     return view('tasks');
 });
@@ -58,3 +64,7 @@ Route::delete('/task/{task}', function (Task $task) {
 });
 
 //Route::controller('demo', 'Admin\DemoController');
+// Authentication Routes...
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
