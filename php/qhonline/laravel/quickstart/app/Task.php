@@ -6,6 +6,8 @@ namespace App;
  * Explain : this file was generate by command line `php artisan make:model Task`
  *
  * dùng model tasks vẫn tự nhận table task
+ * 
+ * all Laravel app folders are auto-loaded using the PSR-4 auto-loading standard
  *
  */
 
@@ -25,8 +27,10 @@ class Task extends Model
      * The attributes that are mass assignable.
      *
      * @var array
+     *
+     * phải nhập column vào đây thì mới add được
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'email'];
 
     /**
      * Get the user that owns the task.

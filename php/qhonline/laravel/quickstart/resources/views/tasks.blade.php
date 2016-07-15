@@ -1,6 +1,6 @@
 <!-- resources/views/tasks.blade.php -->
 @extends('layouts.app')
-@section('content')
+@section('contentBtt')
     <!-- Bootstrap Boilerplate... -->
     <div class="panel-body">
         <!-- Display Validation Errors -->

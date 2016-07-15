@@ -22,6 +22,7 @@ Route::get('/', function () {
 
 Route::get('/tasks', 'TaskController@index');
 Route::post('/task', 'TaskController@store');
+//phải để là {task} thì mới tự get được data
 Route::delete('/task/{task}', 'TaskController@destroy');
 
 Route::resource('testcrud', 'TaskController');
@@ -34,34 +35,34 @@ Route::get('/task', function () {
  * Add new task
  */
 
-Route::post('/task', function (Request $request) {
-    $validator = Validator::make($request->all(), [
-        'name' => 'required|max:255',
-    ]);
-    
-    if ($validator->fails()) {
-        return redirect('/tasks')
-            ->withInput()
-            ->withErrors($validator);
-    };
-    
-    $task = new Task;
-    $task->name = $request->name;
-    $task->save();
-    
-    return redirect('/');
-});
+//Route::post('/task', function (Request $request) {
+//    $validator = Validator::make($request->all(), [
+//        'name' => 'required|max:255',
+//    ]);
+//
+//    if ($validator->fails()) {
+//        return redirect('/tasks')
+//            ->withInput()
+//            ->withErrors($validator);
+//    };
+//
+//    $task = new Task;
+//    $task->name = $request->name;
+//    $task->save();
+//
+//    return redirect('/');
+//});
 
 /**
  * Delete a task
  *
  * phải để là {task} thì mới tự get được data
  */
-Route::delete('/task/{task}', function (Task $task) {
-    $task->delete();
-    
-    return redirect('/');
-});
+//Route::delete('/task/{task}', function (Task $task) {
+//    $task->delete();
+//
+//    return redirect('/');
+//});
 
 //Route::controller('demo', 'Admin\DemoController');
 // Authentication Routes...
