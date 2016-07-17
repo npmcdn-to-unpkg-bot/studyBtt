@@ -2,7 +2,11 @@
 @extends('layouts.app')
 @section('contentBtt')
     <!-- Bootstrap Boilerplate... -->
-
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
     <div class="panel-body">
         <!-- Display Validation Errors -->
     @include('common.errors')

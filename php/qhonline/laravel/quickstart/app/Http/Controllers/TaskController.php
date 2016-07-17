@@ -50,7 +50,7 @@ class TaskController extends Controller
         }
 //        dd($request->user()->tasksBtt()->find(7)->name);
 //        dd($request->user()->tasksBtt()->get()->toArray());
-        dd(Task::get()->count());
+//        dd(Task::get()->count());
 
         return view('tasks.index', [
             'tasks' => $this->tasks->forUser($request->user()),
@@ -68,12 +68,18 @@ class TaskController extends Controller
         $this->validate($request, [
             'name' => 'required|max:255|min:5',
         ]);
+        if ($request->has('email')) {
+            echo "yes, has email";
+        }
+//        dd($request->input());
 
-        $request->user()->tasks()->create([
+        $request->user()->tasksBtt()->create([
             'name' => $request->name,
         ]);
 
-        return redirect('/tasks');
+//        redirect()->action('HomeController@index');
+//        redirect()->action('UserController@profile', ['id' => 1]);
+        return redirect()->route('tasks.list')->with('status', 'Profile updated!');
     }
 
     /**

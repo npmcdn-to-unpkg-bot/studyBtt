@@ -20,12 +20,35 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/tasks', 'TaskController@index');
+Route::get('/tasks', ['as' => 'tasks.list', 'uses' => 'TaskController@index']);
 Route::post('/task', 'TaskController@store');
 //phải để là {task} thì mới tự get được data
 Route::delete('/task/{task}', 'TaskController@destroy');
 
-Route::resource('testcrud', 'TaskController');
+Route::resource(
+    'photo',
+    'PhotoController',
+    [
+        'only' => [
+            'index',
+            'show',
+            'create',
+            'update'
+        ],
+        'except' => [
+            'create',
+            'store'
+        ],
+        'names' => [
+            'create' => 'photo.build'
+        ],
+        'parameter' => [
+            'photo' => 'admin_user'
+        ]
+    ]
+);
+
+Route::post('photo/store', ['as' => 'photo.store', 'uses' => 'PhotoController@store']);
 
 Route::get('/task', function () {
     return view('tasks');

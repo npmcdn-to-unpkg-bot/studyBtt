@@ -14,7 +14,7 @@ class TaskRepository
      */
     public function forUser(User $user)
     {
-        return $user->tasks()
+        return $user->tasksBtt()
             ->orderBy('created_at', 'asc')
             ->get();
     }
