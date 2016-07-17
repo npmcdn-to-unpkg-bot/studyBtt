@@ -31,41 +31,10 @@ Route::get('/task', function () {
     return view('tasks');
 });
 
-/*
- * Add new task
- */
+Route::group(['prefix' => 'admin', 'namespace' => 'AdminBtt'], function () {
+    Route::get('/', ['as' => 'admin.list', 'uses' => 'AdminController@index']);
+});
 
-//Route::post('/task', function (Request $request) {
-//    $validator = Validator::make($request->all(), [
-//        'name' => 'required|max:255',
-//    ]);
-//
-//    if ($validator->fails()) {
-//        return redirect('/tasks')
-//            ->withInput()
-//            ->withErrors($validator);
-//    };
-//
-//    $task = new Task;
-//    $task->name = $request->name;
-//    $task->save();
-//
-//    return redirect('/');
-//});
-
-/**
- * Delete a task
- *
- * phải để là {task} thì mới tự get được data
- */
-//Route::delete('/task/{task}', function (Task $task) {
-//    $task->delete();
-//
-//    return redirect('/');
-//});
-
-//Route::controller('demo', 'Admin\DemoController');
-// Authentication Routes...
 Route::auth();
 
 Route::get('/home', 'HomeController@index');

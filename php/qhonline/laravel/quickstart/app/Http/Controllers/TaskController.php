@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use DB;
 use App\Task;
 use App\Http\Requests;
 use Illuminate\Http\Request;
@@ -37,7 +39,18 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {
-        $tasks = $request->user()->tasks()->get();
+        $tasks = $request->user()->tasksBtt()->get();
+        foreach ($tasks as $task) {
+            echo $task->name . "<br>";
+        }
+
+        $testQuery = DB::table('tasks')->select('id', 'name', 'email')->where('id', '>', '1')->get();
+        foreach ($testQuery as $query) {
+            echo $query->name . " - " . $query->email . "<br>";
+        }
+//        dd($request->user()->tasksBtt()->find(7)->name);
+//        dd($request->user()->tasksBtt()->get()->toArray());
+        dd(Task::get()->count());
 
         return view('tasks.index', [
             'tasks' => $this->tasks->forUser($request->user()),
