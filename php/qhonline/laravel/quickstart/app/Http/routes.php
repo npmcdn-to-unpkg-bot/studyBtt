@@ -31,7 +31,13 @@ Route::get('/task', function () {
     return view('tasks');
 });
 
-Route::group(['prefix' => 'admin', 'namespace' => 'AdminBtt'], function () {
+/**
+ * chỉ định route này phải chạy qua middleware auth trong file kernel
+ * đăng kí những middleware trong file kernel
+ *
+ * Nếu không định nghĩa namespace ở group, thì ở route bên trong phải chỉ định rõ : AdminBtt\AdminController@index
+ */
+Route::group(['prefix' => 'admin', 'namespace' => 'AdminBtt', 'middleware' => 'agebtt'], function () {
     Route::get('/', ['as' => 'admin.list', 'uses' => 'AdminController@index']);
 });
 
