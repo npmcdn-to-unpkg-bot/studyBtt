@@ -147,7 +147,15 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+
+        /*
+         * Custom project
+         */
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        /*
+         * Dev
+         */
+        Barryvdh\Debugbar\ServiceProvider::class, // Debug
 
         /*
          * Application Service Providers...
