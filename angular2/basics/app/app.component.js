@@ -12,9 +12,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
  * Created by MSI on 20-Jun-16.
  */
 var core_1 = require('@angular/core');
+var http_1 = require('@angular/http'); // import http ở main để những thằng component có thể dùng
 var router_deprecated_1 = require('@angular/router-deprecated');
 var userInput_component_1 = require('./userInput/userInput.component');
 var hero_form_component_1 = require('./Forms/hero-form.component');
+var news_component_1 = require('./news/news.component');
+var news_service_1 = require('./news/news.service');
 var AppComponent = (function () {
     function AppComponent() {
         this.title = "Basic Angular 2";
@@ -22,9 +25,9 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-basics',
-            template: "\n        <h1>{{title}}</h1>\n        <nav>\n            <a [routerLink]=\"['UserInput']\">User Input</a>\n            <a [routerLink]=\"['Form']\">Form</a>\n        </nav>\n        <router-outlet></router-outlet>\n    ",
+            template: "\n        <h1>{{title}}</h1>\n        <nav>\n            <a [routerLink]=\"['UserInput']\">User Input</a>\n            <a [routerLink]=\"['Form']\">Form</a>\n            <a [routerLink]=\"['News']\">News</a>\n        </nav>\n        <router-outlet></router-outlet>\n    ",
             directives: [userInput_component_1.UserInputComponent, router_deprecated_1.ROUTER_DIRECTIVES, hero_form_component_1.HeroFormComponent],
-            providers: [router_deprecated_1.ROUTER_PROVIDERS]
+            providers: [router_deprecated_1.ROUTER_PROVIDERS, news_service_1.NewsService, http_1.HTTP_PROVIDERS]
         }),
         router_deprecated_1.RouteConfig([
             {
@@ -37,6 +40,11 @@ var AppComponent = (function () {
                 name: 'Form',
                 component: hero_form_component_1.HeroFormComponent
             },
+            {
+                path: '/news',
+                name: 'News',
+                component: news_component_1.NewsComponent
+            }
         ]), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
