@@ -1,0 +1,31 @@
+<h1>{{title}}</h1>
+<div>
+    <!--one way binding-->
+    <!--<input value="{{hero.name}}" placeholder="name">-->
+    <!--two way binding-->
+    <!--<input [(ngModel)]="hero.name" placeholder="name">-->
+</div>
+<h2>My Heroes</h2>
+<ul class="heroes">
+    <li *ngFor="let hero of heroes"
+        [class.selected]="hero === selectedHero"
+        (click)="onSelect(hero)">
+        <span class="badge">{{hero.id}}</span> {{hero.name}}
+        <button class="delete-button" (click)="deleteHero(hero, $event)">Delete</button>
+    </li>
+</ul>
+
+<div class="error" *ngIf="error">{{error}}</div>
+<button (click)="addHero()">Add New Hero</button>
+<div *ngIf="addingHero">
+    <my-hero-detail (closeBtt)="closeFormAdd($event)"></my-hero-detail>
+</div>
+
+<!--[$param$] - truyền sang bên herodetail, bên đó cũng phải tạo biến là $param$-->
+<!--<my-hero-detail [hero]="selectedHero"></my-hero-detail>-->
+<div *ngIf="selectedHero">
+    <h2>
+        {{selectedHero.name | uppercase}} is my hero
+    </h2>
+    <button (click)="gotoDetail()">View Details</button>
+</div>
