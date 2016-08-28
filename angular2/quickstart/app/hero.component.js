@@ -32,6 +32,8 @@ var HeroComponent = (function () {
         // this.heroes = this.heroService.getHeroes();
         this.heroService.getHeroes().then(function (value) {
             _this.heroes = value;
+        }, function (error) {
+            console.log("bi reject r");
         });
     };
     HeroComponent.prototype.selectHero = function (hero) {
@@ -56,6 +58,12 @@ var HeroComponent = (function () {
         event.stopPropagation();
         this.heroService
             .deleteHero(hero)
+            .then(function (res) {
+            _this.heroes = _this.heroes.filter(function (h) { return h !== hero; });
+            if (_this.selectedHero === hero) {
+                _this.selectedHero = null;
+            }
+        })
             .then(function (res) {
             _this.heroes = _this.heroes.filter(function (h) { return h !== hero; });
             if (_this.selectedHero === hero) {

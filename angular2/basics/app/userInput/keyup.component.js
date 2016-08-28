@@ -95,7 +95,7 @@ var EventComponent = (function () {
     EventComponent = __decorate([
         core_1.Component({
             selector: 'eventStudy',
-            template: "\n        <input [value]=\"firstname\" (input)=\"firstname=$event.target.value\">\n        <div [class.btt]=\"isClass\" [style.width.px]=\"222\">Class</div>\n        <div [ngClass]=\"{active: isActive, disabled: isDisabled}\">Ng Class</div>\n        {{firstname}}\n    "
+            template: "\n        <input [value]=\"firstname\" (input)=\"firstname=$event.target.value\">\n        <textarea [value]=\"firstname\" (keyup)=\"firstname=$event.target.value\"></textarea>\n        <div [class.btt]=\"isClass\" [style.width.px]=\"222\">Class</div>\n        <div [ngClass]=\"{active123: isActive, disabledbtt: isDisabled}\">Ng Class</div>\n        {{firstname}}\n    "
         }), 
         __metadata('design:paramtypes', [])
     ], EventComponent);

@@ -14,7 +14,7 @@ import {HeroObject} from './hero.object';
 @Injectable()
 export class HeroService {
     // gọi đến memory data
-    private heroesUrl = 'app/allheroes';  // URL to web api
+    private heroesUrl = 'app/allheroes1';  // URL to web api
     constructor(private http: Http) { }
     // Hàm này là hàm cũ, trước khi dùng data in memory
     // getHeroes() {
@@ -25,10 +25,17 @@ export class HeroService {
         //hàm http.get trả về một RxJS Observable (quản lí luồng bất đồng bộ dữ liệụ.
         // Dùng toPromise để convert nó về Promise. Nhưng thằng Observable lại không có hàm toPromise.
         // Chính vì thế nên ta sẽ dùng 1 'operator' mà đã extend từ thằng Observale bằng cách import rxjs...
-
+// Promise: http://freetuts.net/tim-hieu-promise-trong-javascript-es6-620.html
         return this.http.get(this.heroesUrl)
             .toPromise()
-            .then(response => response.json().data)
+            .then(
+                response => response.json().data,
+                function(error) {
+                    console.log('reject me no r123', error);
+                    // return Promise.reject(error.message || error);
+                }
+            )
+            // .then(() => console.log("then (2)"))
             .catch(this.handleError);
     }
 

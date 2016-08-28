@@ -1,0 +1,9 @@
+<!--Truyền tham số format-->
+<p>The hero's birthday is {{ birthday | date :format | uppercase}} </p>
+<p>The hero's birthday is {{ birthday | date :format | uppercase}} </p>
+<button (click)="toggleFormat()">Toggle Format</button>
+<div (myClick)="clickMessage=$event">click with myClick</div>
+
+
+<h3>My Pipe</h3>
+<p>Super power boost: {{2 | myPipe: 10}}</p>

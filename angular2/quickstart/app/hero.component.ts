@@ -38,6 +38,8 @@ export class HeroComponent implements OnInit {
         // this.heroes = this.heroService.getHeroes();
         this.heroService.getHeroes().then(value => {
             this.heroes = value
+        }, function(error) {
+            console.log("bi reject r");
         });
     }
 
@@ -66,6 +68,14 @@ export class HeroComponent implements OnInit {
         event.stopPropagation();
         this.heroService
             .deleteHero(hero)
+            .then(
+                res => {
+                    this.heroes = this.heroes.filter(h => h !== hero);
+                    if (this.selectedHero === hero) {
+                        this.selectedHero = null;
+                    }
+                }
+            )
             .then(
                 res => {
                     this.heroes = this.heroes.filter(h => h !== hero);
